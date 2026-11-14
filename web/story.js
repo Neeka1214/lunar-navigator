@@ -1,12 +1,11 @@
 /* Chang'e & the Jade Rabbit (嫦娥奔月 · 玉兔) — optional story layer
  *  - Chang'e's flight calculator: real Earth–Moon distance now (JPL Horizons) -> travel time at different speeds
  *  - Find the Jade Rabbits while walking in the Astronaut view (3 hide in the darkest, coldest spots nearby)
- *  - Can be switched off with the 🐰 button (remembered in this browser)
+ *  - Lives in its own tab; the rabbits only appear in 3D while the hunt is switched on
  * Code written with AI assistance (Claude).
  */
 "use strict";
-const ST = { on: true, rabbits: [], found: 0, spawnedFor: null, speed: 1000 };
-try { ST.on = localStorage.getItem("story") !== "off"; } catch (e) { /* storage unavailable */ }
+const ST = { on: true, hunt: false, rabbits: [], found: 0, spawnedFor: null, speed: 1000 };
 
 const MOON_KMH = 3680; // mean orbital speed of the Moon around Earth (2*pi*384,400 km / 27.32 d)
 const SPEEDS = [
@@ -25,12 +24,6 @@ function fmtTime(h) {
 
 /* ---------- Chang'e's flight calculator ---------- */
 function drawStory() {
-  const box = $("story"); box.style.display = ST.on ? "" : "none";
-  $("storyOff").hidden = ST.on;
-  $("storyTab").style.display = ST.on ? "" : "none";
-  $("storyBtn").classList.toggle("active", ST.on);
-  $("storyBtn").textContent = `🐰 Chang'e story: ${ST.on ? "ON" : "OFF"}`;
-  if (!ST.on) { if (window.showTab && window.curTab === "story") window.showTab("plan"); return; }
   const i = Math.floor(T()), dkm = EPH.earth_dist_km[i];
   if (!ST.range) { let lo = 1e9, hi = 0; for (const v of EPH.earth_dist_km) { lo = Math.min(lo, v); hi = Math.max(hi, v); } ST.range = [lo, hi]; }
   const [lo, hi] = ST.range, surf = dkm - 6371 - 1737; // surface to surface
@@ -93,7 +86,7 @@ function spawnRabbits() {
 }
 function storyTick() {
   const hud = $("rabbitHud");
-  if (!ST.on || !A.fp || !X.tile) { hud.style.display = "none"; ST.rabbits.forEach((r) => (r.sprite.visible = false)); return; }
+  if (!ST.hunt || !A.fp || !X.tile) { hud.style.display = "none"; ST.rabbits.forEach((r) => (r.sprite.visible = false)); return; }
   if (ST.spawnedFor !== S.site.id) spawnRabbits();
   ST.rabbits.forEach((r) => (r.sprite.visible = !r.found));
   X.dirty = true;
@@ -120,12 +113,15 @@ function storyTick() {
 
 /* ---------- toggle + hooks ---------- */
 (function () {
-  $("storyBtn").onclick = () => {
-    ST.on = !ST.on;
-    try { localStorage.setItem("story", ST.on ? "on" : "off"); } catch (e) { /* ignore */ }
-    if (!ST.on && X.three) clearRabbits();
-    drawStory(); storyTick();
+  window.setHunt = (on) => {
+    ST.hunt = on;
+    if (!on && X.three) clearRabbits();
+    $("huntBtn").textContent = `🐇 Rabbit hunt: ${on ? "ON" : "OFF"}`;
+    $("huntBtn").classList.toggle("active", on);
+    $("startHunt").textContent = on ? "🐇 Stop the rabbit hunt" : "🐇 Start the rabbit hunt";
+    storyTick();
   };
+  $("huntBtn").onclick = () => { setHunt(!ST.hunt); if (ST.hunt && !A.fp) setFP(true); };
   const prevRender = window.onRender;
   window.onRender = (cur) => { prevRender(cur); if (EPH) drawStory(); storyTick(); };
   const prevApply = applyFP;

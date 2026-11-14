@@ -16,9 +16,6 @@
       <p class="sub">Compare lunar landing sites &amp; dates in seconds — sunlight for power, Earth in view for direct-to-Earth comms.</p>
     </div>
   </div>
-  <div class="modes">
-    <button id="storyBtn" class="mode" title="Show or hide the Chang'e &amp; Jade Rabbit story">🐰 Chang'e story: ON</button>
-  </div>
 </header>
 
 <nav id="tabs">
@@ -124,6 +121,7 @@
       <p class="note polarNone">The 3D view is available for the named south-polar sites (south of 80°S). Choose one in the list on the left.</p>
       <div id="threeWrap">
         <div class="btnrow"><button id="fpBtn" class="primary">👩‍🚀 Stand here as an astronaut</button>
+          <button id="huntBtn" class="hunt">🐇 Rabbit hunt: OFF</button>
           <span class="legend"><label>Vertical exaggeration <input id="exag" type="range" min="1" max="5" step="0.5" value="2"> <b id="exagV">2×</b></label></span></div>
         <p class="note" id="fpHint"></p>
         <div id="threeBox">
@@ -159,16 +157,16 @@
     <!-- TAB 5: story -->
     <div class="tabpane" id="tab-story" hidden>
       <div id="story">
-        <div class="titlebar"><h2>🌕 Chang'e's flight to the Moon · 嫦娥奔月</h2><span class="legend">You can switch the story off with the 🐰 button at the top right</span></div>
+        <div class="titlebar"><h2>🌕 Chang'e's flight to the Moon · 嫦娥奔月</h2></div>
         <div id="storyBody"></div>
         <div class="game">
           <h3>🐇 Game: find the Jade Rabbits (玉兔)</h3>
           <p>Five Jade Rabbits are hiding within about 4 km of the landing site. Three of them hide in the <b>darkest, coldest spots</b>, just like real water ice.
-            Walk around on the real terrain and find them all. A box at the bottom left tells you how far away the nearest one is.</p>
+            Walk around on the real terrain and find them all. A box at the bottom left tells you how far away the nearest one is.
+            The rabbits only appear while the hunt is on, so the 3D view stays clean for everyone else.</p>
           <button id="startHunt" class="primary">🐇 Start the rabbit hunt</button> <span class="note" id="huntNote"></span>
         </div>
       </div>
-      <p class="note" id="storyOff" hidden>The Chang'e story is switched off. Press the 🐰 button at the top right to turn it on.</p>
     </div>
 
     <!-- TAB 6: learn -->
@@ -188,11 +186,11 @@
   Code and data-processing scripts were written with AI assistance (Claude, Anthropic).
   Site coordinates are approximate, from public mission reports. *always = no change through the end of the dataset (2028-12). NASA Space Apps Challenge 2026.
 </footer>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+<script src="lib/three.min.js"></script>
+<script src="lib/OrbitControls.js"></script>
 <script src="app.js"></script>
 <script src="extra.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
+<script src="lib/d3.min.js"></script>
 <script src="astronaut.js"></script>
 <script src="story.js"></script>
 <script src="tabs.js"></script>

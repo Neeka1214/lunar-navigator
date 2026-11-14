@@ -357,7 +357,7 @@ function drawLearn(cur, info) {
   <h3>🇨🇦 Partners are going to the south pole too</h3>
   <p>The Canadian Space Agency (CSA) is preparing a Canadian lunar rover mission to the Moon's south polar region, and CSA astronaut
   Jeremy Hansen is part of NASA's Artemis II crew. A rover faces the same two questions a lander does, but it moves, so the answers change
-  with every kilometre: <i>Will my solar panels see the Sun? Can I talk to Earth?</i> Try the <b>Nearby alternatives</b> heatmap to see how far a rover
+  with every kilometre: <i>Will my solar panels see the Sun? Can I talk to Earth?</i> Open the <b>🔍 Nearby spots</b> tab to see how far a rover
   would have to drive to reach better sunlight. Learn more at <a href="https://www.asc-csa.gc.ca/eng/astronomy/moon-exploration/" target="_blank">CSA Moon Exploration</a>.</p>
   <h3>🔬 Can I trust these numbers?</h3>
   <p>The Sun and Earth positions come from NASA JPL Horizons, and the terrain comes from NASA's LOLA laser altimeter. We checked the model against

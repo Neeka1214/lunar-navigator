@@ -20,7 +20,7 @@ whether it can talk directly to Earth, and for how long.
 - **LROC NAC image coverage** for each site, from LROC QuickMap
 - **Six tabs** (Plan a landing, Nearby spots, Walk on the Moon, See Earth, Chang'e & Jade Rabbit, Learn why) that share one site-and-date sidebar
 - **Astronaut View**: walk on real LOLA terrain (W A S D keys) with a live check of whether the Sun and Earth are visible; see which face of Earth points at you, its time zones, and which cities and Deep Space Network antennas can see the Moon right now
-- **Chang'e & Jade Rabbit** (嫦娥 · 玉兔), optional and can be switched off: the real Earth–Moon distance, how long the trip would take at different speeds, and a find-the-rabbits game
+- **Chang'e & Jade Rabbit** (嫦娥 · 玉兔), in its own tab: the real Earth–Moon distance, how long the trip would take at different speeds, and a find-the-rabbits game (rabbits appear in 3D only while the hunt is on)
 
 ## NASA data and resources used
 | Resource | How it is used |

@@ -8,7 +8,6 @@ const TABS = ["plan", "nearby", "walk", "earth", "story", "learn"];
 
 function showTab(name) {
   if (!TABS.includes(name)) name = "plan";
-  if (name === "story" && !ST.on) name = "plan";
   window.curTab = name;
   for (const t of TABS) $("tab-" + t).hidden = t !== name;
   document.querySelectorAll("#tabs .tab").forEach((b) => b.classList.toggle("active", b.dataset.tab === name));
@@ -34,10 +33,12 @@ function drawMini(cur) {
 (function () {
   document.querySelectorAll("#tabs .tab").forEach((b) => (b.onclick = () => showTab(b.dataset.tab)));
   $("startHunt").onclick = () => {
+    if (ST.hunt) { setHunt(false); return; }
     if (!(S.site.lat <= -80) || S.site.id.startsWith("custom")) {
       $("huntNote").textContent = "Choose a south-polar site first (for example Artemis III: Peak Near Shakleton).";
       return;
     }
+    setHunt(true);
     showTab("walk");
     if (!A.fp) setFP(true);
     $("threeBox").scrollIntoView({ behavior: "smooth", block: "center" });
