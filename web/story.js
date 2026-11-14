@@ -79,7 +79,7 @@ function spawnRabbits() {
   for (let k = 0; k < 2; k++) picks.push(cells[3 + Math.floor(Math.random() * (cells.length - 3))]);
   for (const [sun, r, q] of picks) {
     const e = (q - c) * hm.step_m + (Math.random() - 0.5) * hm.step_m * 0.6, n = (r - c) * hm.step_m + (Math.random() - 0.5) * hm.step_m * 0.6;
-    const s = rabbitSprite(); s.position.set(e, heightAt(e, n) + 15, -n); X.three.scene.add(s);
+    const s = rabbitSprite(); s.position.set(e, heightAt(e, n) + 24, -n); X.three.scene.add(s);
     ST.rabbits.push({ e, n, sun, sprite: s, found: false });
   }
   ST.spawnedFor = S.site.id;

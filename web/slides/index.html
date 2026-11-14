@@ -26,6 +26,11 @@
   .frame { border: 2px solid var(--line); border-radius: 14px; overflow: hidden; background: #000; }
   .frame img { width: 100%; }
   .cap { font-size: 20px; color: var(--muted); margin-top: 8px; line-height: 1.35; }
+  .mark { position: absolute; transform: translate(-50%, -50%); width: 44px; height: 44px; font-size: 24px; box-shadow: 0 0 0 4px rgba(0,0,0,.75), 0 0 18px rgba(255,200,61,.8); margin: 0; }
+  .steps3 .feat p { font-size: 22px; } .steps3 .feat { margin-bottom: 12px; }
+  .solves { position: absolute; right: 72px; top: 50px; display: flex; gap: 10px; align-items: center; font-size: 20px; color: var(--muted); }
+  .chip { display: inline-flex; align-items: center; gap: 8px; padding: 6px 16px 6px 6px; border-radius: 30px; font-size: 22px; font-weight: 700; background: var(--panel); border: 2px solid var(--line); color: var(--text); }
+  .chip .step { width: 34px; height: 34px; flex-basis: 34px; font-size: 18px; margin: 0; }
   .num { position: absolute; right: 48px; bottom: 26px; font-size: 20px; color: var(--muted); }
   .box { background: var(--panel); border: 2px solid var(--line); border-radius: 16px; padding: 20px 24px; }
   .box p, .box li { font-size: 22px; color: #cdd5e6; }
@@ -96,18 +101,22 @@
 <!-- 3 · Plan a landing -->
 <section class="slide">
   <div class="kicker">Tab 1 · 🛰️ Plan a landing</div>
+  <div class="solves">Solves <span class="chip"><span class="step">☀</span>Power</span><span class="chip"><span class="step" style="background:var(--earth)">🌍</span>Comms</span></div>
   <h2>Pick a site and a date, get the answer at once</h2>
   <div class="row">
     <div class="col" style="flex:0 0 1180px">
-      <div class="frame"><img src="img/ui_plan.png"></div>
-      <div class="cap">The real interface. Left sidebar (always visible): site list, clickable south-pole map, date slider, and a live verdict.</div>
+      <div class="frame" style="position:relative"><img src="img/ui_plan.png">
+        <span class="step mark" style="left:15.6%; top:28.1%">1</span><span class="step mark" style="left:17.6%; top:82.9%">2</span><span class="step mark" style="left:56.2%; top:23.6%">3</span><span class="step mark" style="left:28.6%; top:73%">4</span><span class="step mark" style="left:30.6%; top:97%">5</span>
+      </div>
+      <div class="cap">The real interface. The numbers match the steps on the right. The left sidebar stays visible on every tab.</div>
     </div>
-    <div class="col">
-      <div class="feat"><span class="step">1</span><p><b>24 official sites</b> from NASA Moon Trek: 13 Artemis III regions, 7 CLPS missions, plus ISRO, JAXA and Apollo 11. Or <b>click anywhere</b> on the map: the horizon is computed live.</p></div>
-      <div class="feat"><span class="step">2</span><p><b>Sky view:</b> Sun and Earth over the real horizon, with their paths for the next 30 days.</p></div>
-      <div class="feat"><span class="step">3</span><p><b>Verdict:</b> <span class="pill" style="background:#123a2c; color:var(--ok)">GO</span><span class="pill" style="background:#3a1620; color:var(--bad)">NO COMMS</span><span class="pill" style="background:#3a1620; color:var(--bad)">NO POWER</span> plus time to sunset / Earthrise, longest darkness, solar-panel output.</p></div>
-      <div class="feat"><span class="step">4</span><p><b>30-day timeline</b> and <b>seasons</b>: every lunar day 2026–2028 at a glance. Click a bar to jump there.</p></div>
-      <div class="box" style="margin-top:10px"><p><b style="color:var(--text)">Example, Connecting Ridge, 2026-11-14:</b> Sun 1.4° ✓, Earth −4.4° ✗ → <b class="bad">NO COMMS</b>. Earthrise in 4 d 9 h; next lunar day sunlit 73%; longest darkness 7 d 10 h.</p></div>
+    <div class="col steps3">
+      <div class="feat"><span class="step">1</span><p><b>Choose a site</b> in the <b>left sidebar</b>: 24 official sites from NASA Moon Trek (13 Artemis III regions, 7 CLPS missions, ISRO, JAXA, Apollo 11), or <b>click anywhere</b> on the map.</p></div>
+      <div class="feat"><span class="step">2</span><p><b>Choose a date</b>, also in the <b>left sidebar</b>: type it, drag the slider, or press ▶ to watch time pass.</p></div>
+      <div class="feat"><span class="step">3</span><p><b>Read the sky view:</b> Sun and Earth over the real terrain horizon, with their paths for the next 30 days.</p></div>
+      <div class="feat"><span class="step">4</span><p><b>Read the verdict:</b> <span class="pill" style="background:#123a2c; color:var(--ok)">GO</span><span class="pill" style="background:#3a1620; color:var(--bad)">NO COMMS</span><span class="pill" style="background:#3a1620; color:var(--bad)">NO POWER</span> plus time to sunset / Earthrise, longest darkness, solar-panel output.</p></div>
+      <div class="feat"><span class="step">5</span><p><b>Scroll down:</b> 30-day timeline, seasons 2026–2028, compare sites, find landing windows.</p></div>
+      <div class="box" style="margin-top:6px; padding:14px 20px"><p><b style="color:var(--text)">Example, Connecting Ridge, 2026-11-14:</b> Sun 1.4° ✓, Earth −4.4° ✗ → <b class="bad">NO COMMS</b>. Earthrise in 4 d 8 h; next lunar day sunlit 73%; longest darkness 7 d 10 h.</p></div>
     </div>
   </div>
   <div class="num">3 / 7</div>
@@ -116,6 +125,7 @@
 <!-- 4 · Compare + nearby -->
 <section class="slide">
   <div class="kicker">Tab 1 &amp; Tab 2 · 🔍 Compare, find a window, move a little</div>
+  <div class="solves">Solves <span class="chip"><span class="step" style="background:var(--bad)">⏱</span>Replanning</span><span class="chip"><span class="step">☀</span>Power</span><span class="chip"><span class="step" style="background:var(--earth)">🌍</span>Comms</span></div>
   <h2>Find the best site, the best date and the best spot</h2>
   <div class="row" style="gap:28px">
     <div class="col" style="flex:0 0 470px">
@@ -137,7 +147,8 @@
 
 <!-- 5 · Walk + Earth -->
 <section class="slide">
-  <div class="kicker">Tab 3 · 👩‍🚀 Walk on the Moon &amp; Tab 4 · 🌍 See Earth</div>
+  <div class="kicker">Tab 3 · 👩‍🚀 Walk on the Moon · Tab 4 · 🌍 See Earth · Tab 6 · 📚 Learn</div>
+  <div class="solves">Solves <span class="chip"><span class="step" style="background:var(--ok)">👥</span>Users</span><span class="chip"><span class="step" style="background:var(--earth)">🌍</span>Comms</span></div>
   <h2>Stand on the landing site and look home</h2>
   <div class="row" style="gap:30px">
     <div class="col">
@@ -155,25 +166,36 @@
         <li style="font-size:23px"><b>Who can see the Moon right now?</b> Local time and sky in 11 cities, Taipei first</li>
         <li style="font-size:23px"><b>NASA Deep Space Network:</b> which antenna (Goldstone, Madrid, Canberra) can talk to the lander now</li>
       </ul>
+      <div class="box" style="margin-top:14px; padding:14px 20px"><h3>📚 Tab 6 · Learn why</h3><p>Why the Sun is so low (1.5° tilt), why a few km matter, libration, the 29.5-day lunar day, sharp shadows without air, and the CSA lunar rover and Artemis II.</p></div>
     </div>
   </div>
   <div class="num">5 / 7</div>
 </section>
 
-<!-- 6 · Chang'e + learn -->
+<!-- 6 · Chang'e + rabbit game -->
 <section class="slide">
-  <div class="kicker">Tab 5 · 🐰 Chang'e &amp; Jade Rabbit &amp; Tab 6 · 📚 Learn why</div>
-  <h2>A Moon legend everyone knows makes the science stick</h2>
+  <div class="kicker">Tab 5 · 🐰 Chang'e &amp; Jade Rabbit (嫦娥奔月 · 玉兔)</div>
+  <div class="solves">Solves <span class="chip"><span class="step" style="background:var(--ok)">👥</span>Users</span></div>
+  <h2>A Moon legend turns the science into a game</h2>
   <div class="row" style="gap:30px">
-    <div class="col" style="flex:0 0 1050px">
-      <div class="frame"><img src="img/ui_story.png"></div>
-      <div class="cap">Chang'e's flight calculator, using today's real Earth–Moon distance from JPL Horizons. The rabbits appear in the 3D walk only while the hunt is switched on.</div>
+    <div class="col" style="flex:0 0 1010px">
+      <div class="frame" style="border-color:#6b4a8a"><img src="img/rabbit_game.png"></div>
+      <div class="cap">The real game in the 3D walk. This rabbit hides in a crater floor where the Sun and Earth are both hidden right now. The purple box counts the rabbits and points to the nearest one.</div>
+      <div class="box" style="margin-top:14px; padding:14px 20px">
+        <p><b style="color:var(--text)">Chang'e's flight calculator</b> (today's real distance from JPL Horizons): walking <b style="color:var(--text)">9.1 years</b>, Taiwan High Speed Rail <b style="color:var(--text)">55.2 days</b>, Apollo 11 <b style="color:var(--text)">3.1 days</b>, light <b style="color:var(--text)">1.32 s</b>.
+        "But wait": the Moon moves at 3,680 km/h and won't wait for her, she needs 11 km/s to escape Earth, and the trip changes from 48.4 to 55.3 days as the distance changes.</p>
+      </div>
     </div>
     <div class="col">
-      <p><b>嫦娥奔月:</b> how long would Chang'e take? Walking <b>9.1 years</b>, Taiwan High Speed Rail <b>55.2 days</b>, Apollo 11 <b>3.1 days</b>, light <b>1.32 s</b>.</p>
-      <p><b>"But wait, it is not that simple":</b> the Moon moves at 3,680 km/h and won't wait for her; she needs 11 km/s to escape Earth; the distance changes from 356,648 to 406,603 km (48.4 to 55.3 days by train).</p>
-      <div class="box" style="border-color:#6b4a8a; background:rgba(58,36,86,.3)"><h3 class="rab">🐇 Game: find the Jade Rabbits</h3><p>5 rabbits hide within 4 km in the 3D walk. Three hide in the <b style="color:var(--text)">darkest, coldest spots</b> from our data. Finding one teaches why water ice survives in permanent shadow.</p></div>
-      <div class="box" style="margin-top:14px"><h3>📚 Learn why</h3><p>Why the Sun is so low (1.5° tilt), why km matter, libration, the 29.5-day lunar day, no-atmosphere shadows, and the CSA lunar rover and Artemis II.</p></div>
+      <h3 class="rab" style="font-size:32px; margin-bottom:14px">🐇 How to play</h3>
+      <div class="feat"><span class="step" style="background:var(--rab)">1</span><p>Open the <b>🐰 Chang'e &amp; Jade Rabbit</b> tab and press <b>"Start the rabbit hunt"</b>. You land at the site as an astronaut.</p></div>
+      <div class="feat"><span class="step" style="background:var(--rab)">2</span><p><b>Walk</b> with W A S D or the on-screen arrows (Shift = drive like a rover). Drag to look around, scroll to zoom.</p></div>
+      <div class="feat"><span class="step" style="background:var(--rab)">3</span><p><b>Follow the clue:</b> the purple box says how far the nearest rabbit is and which way to turn (⬆ ↗ ↖ …).</p></div>
+      <div class="feat"><span class="step" style="background:var(--rab)">4</span><p><b>Get within 60 m</b> to find it, and learn how often that spot sees the Sun. Find all 5!</p></div>
+      <div class="box" style="border-color:#6b4a8a; background:rgba(58,36,86,.3); margin-top:8px">
+        <h3 class="rab">The science hidden in the game</h3>
+        <p>3 of the 5 rabbits hide in the <b style="color:var(--text)">darkest, coldest spots</b> within 4 km, chosen from our NASA-data sunlight map. That is exactly where <b style="color:var(--text)">water ice</b> can survive for billions of years, and why the south pole matters so much. Players discover it by walking there.</p>
+      </div>
     </div>
   </div>
   <div class="num">6 / 7</div>
@@ -182,6 +204,7 @@
 <!-- 7 · Validation, impact, team -->
 <section class="slide">
   <div class="kicker">Validation · impact · team</div>
+  <div class="solves">Solves <span class="chip"><span class="step">☀</span>Power</span><span class="chip"><span class="step" style="background:var(--earth)">🌍</span>Comms</span><span class="chip"><span class="step" style="background:var(--bad)">⏱</span>Replanning</span><span class="chip"><span class="step" style="background:var(--ok)">👥</span>Users</span></div>
   <h2>Trustworthy numbers, from hours of analysis to seconds</h2>
   <div class="grid3">
     <div class="box" style="border-color:var(--ok)"><div class="stat ok">98.7%</div><p style="margin-top:8px">agreement with NASA Moon Trek's LOLA permanent-shadow map at 300 random south-pole points (149/150 shadowed, 147/150 sunlit found).</p></div>
