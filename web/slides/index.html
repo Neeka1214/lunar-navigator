@@ -28,6 +28,9 @@
   .cap { font-size: 20px; color: var(--muted); margin-top: 8px; line-height: 1.35; }
   .mark { position: absolute; transform: translate(-50%, -50%); width: 44px; height: 44px; font-size: 24px; box-shadow: 0 0 0 4px rgba(0,0,0,.75), 0 0 18px rgba(255,200,61,.8); margin: 0; }
   .steps3 .feat p { font-size: 22px; } .steps3 .feat { margin-bottom: 12px; }
+  .ctab { width: 100%; border-collapse: collapse; margin-top: 6px; }
+  .ctab td { font-size: 21px; padding: 6px 10px; border-bottom: 1px solid var(--line); color: var(--text); }
+  .ctab tr:nth-child(odd) td { background: rgba(255,255,255,.03); }
   .solves { position: absolute; right: 72px; top: 50px; display: flex; gap: 10px; align-items: center; font-size: 20px; color: var(--muted); }
   .chip { display: inline-flex; align-items: center; gap: 8px; padding: 6px 16px 6px 6px; border-radius: 30px; font-size: 22px; font-weight: 700; background: var(--panel); border: 2px solid var(--line); color: var(--text); }
   .chip .step { width: 34px; height: 34px; flex-basis: 34px; font-size: 18px; margin: 0; }
@@ -88,12 +91,18 @@
       <div class="feat"><span class="step" style="background:var(--ok)">👥</span><p><b>Users:</b> mission planners, rover teams, students and anyone who loves looking at the Moon.</p></div>
     </div>
   </div>
-  <div class="flow" style="margin-top:40px">
+  <div class="flow" style="margin-top:18px">
     <div class="box"><h3>NASA open data</h3><p><b class="sun">JPL Horizons</b> Sun &amp; Earth geometry (19,009 hourly steps) · <b>LRO LOLA</b> terrain 80 m / 240 m · <b class="earth">Moon Trek</b> sites &amp; shadow map · <b>LROC QuickMap</b> images · <b>CSA</b></p></div>
     <div class="arrow">→</div>
     <div class="box"><h3>Our model</h3><p>Real horizon in 720 directions for each site (with lunar curvature), then Sun &amp; Earth above or below it, hour by hour</p></div>
     <div class="arrow">→</div>
     <div class="box"><h3>One web page, 6 tabs</h3><p>Free, in any browser, no install. Answers for planners <i>and</i> an experience for the public</p></div>
+  </div>
+  <div class="grid3" style="grid-template-columns:repeat(4,1fr); margin-top:18px">
+    <div class="box" style="padding:14px 20px"><div class="stat sun" style="font-size:48px">1.5°</div><p>tilt of the Moon's axis (Earth: 23.4°), so the polar Sun never climbs high</p></div>
+    <div class="box" style="padding:14px 20px"><div class="stat" style="font-size:48px">29.5 days</div><p>one lunar day: sunrise to sunrise, with nights that can last more than a week</p></div>
+    <div class="box" style="padding:14px 20px"><div class="stat earth" style="font-size:48px">1.3 s</div><p>radio delay to Earth, if Earth is above the horizon at all</p></div>
+    <div class="box" style="padding:14px 20px"><div class="stat ok" style="font-size:48px">720</div><p>horizon directions computed for every site from NASA terrain</p></div>
   </div>
   <div class="num">2 / 7</div>
 </section>
@@ -116,7 +125,8 @@
       <div class="feat"><span class="step">3</span><p><b>Read the sky view:</b> Sun and Earth over the real terrain horizon, with their paths for the next 30 days.</p></div>
       <div class="feat"><span class="step">4</span><p><b>Read the verdict:</b> <span class="pill" style="background:#123a2c; color:var(--ok)">GO</span><span class="pill" style="background:#3a1620; color:var(--bad)">NO COMMS</span><span class="pill" style="background:#3a1620; color:var(--bad)">NO POWER</span> plus time to sunset / Earthrise, longest darkness, solar-panel output.</p></div>
       <div class="feat"><span class="step">5</span><p><b>Scroll down:</b> 30-day timeline, seasons 2026–2028, compare sites, find landing windows.</p></div>
-      <div class="box" style="margin-top:6px; padding:14px 20px"><p><b style="color:var(--text)">Example, Connecting Ridge, 2026-11-14:</b> Sun 1.4° ✓, Earth −4.4° ✗ → <b class="bad">NO COMMS</b>. Earthrise in 4 d 8 h; next lunar day sunlit 73%; longest darkness 7 d 10 h.</p></div>
+      <div class="box" style="margin-top:2px; padding:12px 20px"><p><b style="color:var(--text)">Example, Connecting Ridge, 2026-11-14:</b> Sun 1.4° ✓, Earth −4.4° ✗ → <b class="bad">NO COMMS</b>. Earthrise in 4 d 8 h; next lunar day sunlit 73%; longest darkness 7 d 10 h.</p></div>
+      <div class="box" style="margin-top:12px; padding:14px 20px"><h3 style="font-size:24px">Also in the sidebar</h3><p>Your own site: its horizon is computed live in the browser from LOLA terrain · LROC NAC images of the spot (30 at Connecting Ridge) · links to LROC QuickMap, Moon Trek and a <b style="color:var(--text)">"Verify in JPL Horizons"</b> query for the same place and date.</p></div>
     </div>
   </div>
   <div class="num">3 / 7</div>
@@ -140,6 +150,11 @@
       <div class="frame"><img src="img/heat.png" style="height:520px; width:auto; margin:0 auto"></div>
       <div class="cap"><b style="color:var(--text)">Nearby spots:</b> share of time sunlit for 3,721 points (0.5 km grid, ±15 km) over 2026–2028, on NASA LOLA terrain. Also Earth % and Both %.</div>
       <p style="margin-top:12px; font-size:26px">Connecting Ridge centre: <b>48%</b> sunlit.<br>Just <b>10 km</b> south: <b class="sun">79%</b>. Click a cell to move there.</p>
+      <ul style="margin-top:6px">
+        <li style="font-size:21px">Switch between <b class="sun">Sunlit %</b>, <b class="earth">Earth %</b> and <b class="ok">Both %</b></li>
+        <li style="font-size:21px">White square = the site, green circle = best spot nearby; hover any cell to read its value and distance</li>
+        <li style="font-size:21px">Terrain shading under the colours shows which ridge or crater causes each shadow</li>
+      </ul>
     </div>
   </div>
   <div class="num">4 / 7</div>
@@ -156,7 +171,7 @@
       <div class="cap">3D overview: NASA LOLA terrain (200 m near the site, out to ±150 km), lit by the real Sun for the chosen date. Dashed lines point toward the Sun and Earth.</div>
       <div class="row" style="gap:18px; margin-top:12px">
         <div class="frame" style="flex:0 0 400px"><img src="img/three_fp.png"></div>
-        <div class="col"><p style="font-size:22px"><b>Astronaut view:</b> walk with W A S D on real terrain at eye height. A live box says <span class="sun">"Sun visible here"</span> and <span class="earth">"Earth visible: you can call home"</span>, plus the sunlit % of the spot you stand on. Zoom like binoculars.</p></div>
+        <div class="col"><p style="font-size:21px"><b>Astronaut view:</b> stand 2 m above the real terrain and walk with W A S D (Shift = rover speed). The Sun and Earth have their <b>true sizes</b> in the sky. A live box tells you <span class="sun">"Sun visible here"</span> and <span class="earth">"Earth visible: you can call home"</span>, checked against the terrain around you at every step, plus the sunlit % of the spot you stand on. Scroll to zoom like binoculars.</p></div>
       </div>
     </div>
     <div class="col">
@@ -165,6 +180,7 @@
       <ul style="margin-top:12px">
         <li style="font-size:23px"><b>Who can see the Moon right now?</b> Local time and sky in 11 cities, Taipei first</li>
         <li style="font-size:23px"><b>NASA Deep Space Network:</b> which antenna (Goldstone, Madrid, Canberra) can talk to the lander now</li>
+        <li style="font-size:23px"><b>Earth's phase:</b> when Earth looks 76% lit from the Moon, people on Earth see a 24% lit Moon</li>
       </ul>
       <div class="box" style="margin-top:14px; padding:14px 20px"><h3>📚 Tab 6 · Learn why</h3><p>Why the Sun is so low (1.5° tilt), why a few km matter, libration, the 29.5-day lunar day, sharp shadows without air, and the CSA lunar rover and Artemis II.</p></div>
     </div>
@@ -176,25 +192,36 @@
 <section class="slide">
   <div class="kicker">Tab 5 · 🐰 Chang'e &amp; Jade Rabbit (嫦娥奔月 · 玉兔)</div>
   <div class="solves">Solves <span class="chip"><span class="step" style="background:var(--ok)">👥</span>Users</span></div>
-  <h2>A Moon legend turns the science into a game</h2>
-  <div class="row" style="gap:30px">
-    <div class="col" style="flex:0 0 1010px">
-      <div class="frame" style="border-color:#6b4a8a"><img src="img/rabbit_game.png"></div>
-      <div class="cap">The real game in the 3D walk. This rabbit hides in a crater floor where the Sun and Earth are both hidden right now. The purple box counts the rabbits and points to the nearest one.</div>
-      <div class="box" style="margin-top:14px; padding:14px 20px">
-        <p><b style="color:var(--text)">Chang'e's flight calculator</b> (today's real distance from JPL Horizons): walking <b style="color:var(--text)">9.1 years</b>, Taiwan High Speed Rail <b style="color:var(--text)">55.2 days</b>, Apollo 11 <b style="color:var(--text)">3.1 days</b>, light <b style="color:var(--text)">1.32 s</b>.
-        "But wait": the Moon moves at 3,680 km/h and won't wait for her, she needs 11 km/s to escape Earth, and the trip changes from 48.4 to 55.3 days as the distance changes.</p>
-      </div>
+  <h2>A Moon legend turns the science into a story and a game</h2>
+  <div class="row" style="gap:34px">
+    <div class="col" style="flex:0 0 860px">
+      <h3 class="sun" style="font-size:30px">🌕 How long would Chang'e's flight take?</h3>
+      <p style="font-size:21px">Chang'e drank the elixir and floated to the Moon, where the Jade Rabbit keeps her company. The tool uses the <b>real Earth–Moon distance</b> for the chosen date from JPL Horizons: on 2026-11-14 it is <b>405,270 km</b> centre to centre, about <b>397,162 km</b> ground to ground.</p>
+      <table class="ctab">
+        <tr><td>🚶 Walking</td><td>5 km/h</td><td><b>9.1 years</b></td></tr>
+        <tr><td>🚄 Taiwan High Speed Rail</td><td>300 km/h</td><td><b>55.2 days</b></td></tr>
+        <tr><td>✈️ Airliner</td><td>900 km/h</td><td><b>18.4 days</b></td></tr>
+        <tr><td>🚀 Apollo 11 average (1969)</td><td>5,300 km/h</td><td><b>3.1 days</b></td></tr>
+        <tr><td>💡 Light</td><td>300,000 km/s</td><td><b>1.32 seconds</b></td></tr>
+        <tr><td>🌙 Chang'e: type any speed</td><td>your choice</td><td><b>?</b></td></tr>
+      </table>
+      <h3 style="font-size:25px; margin:14px 0 8px">But wait… it is not that simple!</h3>
+      <div class="feat"><span class="step" style="background:var(--sun)">🌙</span><p style="font-size:21px"><b>The Moon won't wait for her.</b> It circles Earth at 3,680 km/h, 12× faster than the train, and goes around Earth about 2 times during her 55-day ride. She must aim where the Moon <i>will be</i>.</p></div>
+      <div class="feat"><span class="step" style="background:var(--earth)">🌍</span><p style="font-size:21px"><b>Earth's gravity pulls her back.</b> She needs about 11 km/s (40,000 km/h), Earth's escape speed. At train speed she would never reach space.</p></div>
+      <div class="feat"><span class="step" style="background:var(--ok)">📏</span><p style="font-size:21px"><b>The distance keeps changing.</b> The orbit is an ellipse (356,648 to 406,603 km), so the same train ride takes 48.4 to 55.3 days.</p></div>
     </div>
     <div class="col">
-      <h3 class="rab" style="font-size:32px; margin-bottom:14px">🐇 How to play</h3>
-      <div class="feat"><span class="step" style="background:var(--rab)">1</span><p>Open the <b>🐰 Chang'e &amp; Jade Rabbit</b> tab and press <b>"Start the rabbit hunt"</b>. You land at the site as an astronaut.</p></div>
-      <div class="feat"><span class="step" style="background:var(--rab)">2</span><p><b>Walk</b> with W A S D or the on-screen arrows (Shift = drive like a rover). Drag to look around, scroll to zoom.</p></div>
-      <div class="feat"><span class="step" style="background:var(--rab)">3</span><p><b>Follow the clue:</b> the purple box says how far the nearest rabbit is and which way to turn (⬆ ↗ ↖ …).</p></div>
-      <div class="feat"><span class="step" style="background:var(--rab)">4</span><p><b>Get within 60 m</b> to find it, and learn how often that spot sees the Sun. Find all 5!</p></div>
-      <div class="box" style="border-color:#6b4a8a; background:rgba(58,36,86,.3); margin-top:8px">
-        <h3 class="rab">The science hidden in the game</h3>
-        <p>3 of the 5 rabbits hide in the <b style="color:var(--text)">darkest, coldest spots</b> within 4 km, chosen from our NASA-data sunlight map. That is exactly where <b style="color:var(--text)">water ice</b> can survive for billions of years, and why the south pole matters so much. Players discover it by walking there.</p>
+      <h3 class="rab" style="font-size:30px">🐇 Game: find the 5 Jade Rabbits</h3>
+      <div class="frame" style="border-color:#6b4a8a"><img src="img/rabbit_game.png"></div>
+      <div class="cap" style="font-size:18px">Real game screen: a rabbit in a crater floor where the Sun and Earth are both hidden. The purple box counts rabbits and points to the nearest one.</div>
+      <div class="grid2" style="gap:10px 18px; margin-top:12px">
+        <div class="feat" style="margin:0"><span class="step" style="background:var(--rab)">1</span><p style="font-size:20px">Press <b>"Start the rabbit hunt"</b>: you land at the site as an astronaut</p></div>
+        <div class="feat" style="margin:0"><span class="step" style="background:var(--rab)">2</span><p style="font-size:20px"><b>Walk</b> with W A S D (Shift = rover); drag to look, scroll to zoom</p></div>
+        <div class="feat" style="margin:0"><span class="step" style="background:var(--rab)">3</span><p style="font-size:20px"><b>Follow the clue:</b> distance and direction (⬆ ↗ ↖) to the nearest rabbit</p></div>
+        <div class="feat" style="margin:0"><span class="step" style="background:var(--rab)">4</span><p style="font-size:20px"><b>Within 60 m</b> you find it and learn how sunny that spot is</p></div>
+      </div>
+      <div class="box" style="border-color:#6b4a8a; background:rgba(58,36,86,.3); margin-top:14px; padding:14px 20px">
+        <p style="font-size:20px"><b class="rab">The science hidden in the game:</b> 3 of the 5 rabbits hide in the <b style="color:var(--text)">darkest, coldest spots</b> within 4 km, picked from our NASA-data sunlight map. That is exactly where <b style="color:var(--text)">water ice</b> can survive for billions of years. Players discover it by walking there.</p>
       </div>
     </div>
   </div>
