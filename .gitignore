@@ -1,0 +1,6 @@
+# raw NASA downloads (large; re-download with the scripts)
+data_raw/
+# private planning notes
+notes/
+__pycache__/
+*.pyc

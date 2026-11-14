@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lunar Landing Site Navigator</title>
+<link rel="stylesheet" href="style.css">
+<script>if (/debug/.test(location.hash)) { const f = (m) => { document.title = "ERR " + m; }; addEventListener("error", (e) => f(e.message + " @" + e.filename + ":" + e.lineno)); addEventListener("unhandledrejection", (e) => f("promise " + (e.reason && (e.reason.stack || e.reason)))); }</script>
+</head>
+<body>
+<header>
+  <div class="brand">
+    <span class="logo">☾</span>
+    <div>
+      <h1>Lunar Landing Site Navigator</h1>
+      <p class="sub">Compare lunar landing sites &amp; dates in seconds — sunlight for power, Earth in view for direct-to-Earth comms.</p>
+    </div>
+  </div>
+  <div class="modes">
+    <button id="modePlanner" class="mode active">Mission planner</button>
+    <button id="modeLearn" class="mode">Learn why</button>
+    <button id="storyBtn" class="mode" title="Show or hide the Chang'e & Jade Rabbit story">🐰 Chang'e &amp; Jade Rabbit</button>
+  </div>
+</header>
+
+<main>
+  <!-- LEFT: site + time selection -->
+  <section class="panel" id="left">
+    <h2>1 · Choose a site</h2>
+    <select id="siteSelect"></select>
+    <p id="siteNote" class="note"></p>
+    <div class="coords">
+      <label>Lat <input id="latIn" type="number" step="0.01"></label>
+      <label>Lon °E <input id="lonIn" type="number" step="0.01"></label>
+      <button id="goCustom">Use custom</button>
+    </div>
+    <canvas id="map" width="460" height="460" title="Click to pick a custom site"></canvas>
+    <p class="note">South pole map 75°S–90°S (NASA LRO LOLA). <b>Click anywhere</b> to evaluate a custom site — the terrain horizon is computed live.</p>
+    <div class="links" id="links"></div>
+    <div id="nac" class="nacbox"></div>
+
+    <div id="heatWrap">
+      <h2>Nearby alternatives (±15 km)</h2>
+      <div class="btnrow" id="hmBtns">
+        <button data-hm="sun" class="active">Sunlit %</button><button data-hm="earth">Earth %</button><button data-hm="both">Both %</button>
+      </div>
+      <canvas id="heat" width="310" height="344" title="Click a cell to evaluate that spot"></canvas>
+      <p class="note" id="heatNote"></p>
+    </div>
+
+    <h2>2 · Choose a date (UTC)</h2>
+    <input id="dateIn" type="datetime-local">
+    <div class="slider-row">
+      <button id="play" title="Animate">▶</button>
+      <input id="slider" type="range" min="0" max="720" value="0">
+    </div>
+    <p class="note" id="sliderLabel"></p>
+    <div class="quick">
+      <button data-shift="-709">− 1 lunar day</button>
+      <button data-shift="-24">− 1 day</button>
+      <button data-shift="24">+ 1 day</button>
+      <button data-shift="709">+ 1 lunar day</button>
+    </div>
+  </section>
+
+  <!-- CENTER: sky + timeline -->
+  <section class="panel" id="center">
+    <div class="titlebar">
+      <h2 id="skyTitle">Sky view</h2>
+      <span class="legend"><i class="sun"></i>Sun <i class="earth"></i>Earth <i class="terrain"></i>Terrain horizon (LOLA)</span>
+    </div>
+    <canvas id="sky" width="900" height="330"></canvas>
+    <p class="note">Panorama around the lander. Vertical scale is stretched so the low polar Sun is visible. Sun &amp; Earth are drawn at their <b>true angular size</b>. Dotted lines = path over the next 30 days.</p>
+
+    <div class="cards" id="cards"></div>
+
+    <div class="titlebar"><h2>Next 30 days</h2><span class="legend"><i class="sun"></i>Sunlit <i class="earth"></i>Earth visible <i class="both"></i>Both (power + comms)</span></div>
+    <canvas id="timeline" width="900" height="120"></canvas>
+
+    <div class="titlebar"><h2>Seasons · every lunar day, 2026-11 → 2028-12</h2><span class="legend"><i class="sun"></i>Sunlit <i class="earth"></i>Earth visible <i class="both"></i>Both · click a bar to jump</span></div>
+    <canvas id="season" width="900" height="150"></canvas>
+
+    <div id="threeWrap">
+      <div class="titlebar"><h2>3D terrain view</h2>
+        <span class="legend"><label>Vertical exaggeration <input id="exag" type="range" min="1" max="5" step="0.5" value="2"> <b id="exagV">2×</b></label></span></div>
+      <div class="btnrow"><button id="fpBtn" class="primary">👩‍🚀 Stand here as an astronaut</button>
+        <span class="note" id="fpHint"></span></div>
+      <div id="threeBox">
+        <div id="three"></div>
+        <div id="walkHud" style="display:none"></div>
+        <div id="rabbitHud" style="display:none"></div>
+        <div id="walkPad"><button data-k="w">▲</button><button data-k="a">◀</button><button data-k="s">▼</button><button data-k="d">▶</button></div>
+      </div>
+      <p class="note" id="threeNote"></p>
+    </div>
+
+    <section id="astro">
+      <div class="titlebar"><h2>👩‍🚀 Astronaut view · Earth from this spot</h2><span class="legend" id="astroTime"></span></div>
+      <div class="astro-grid">
+        <div>
+          <canvas id="globe" width="340" height="340"></canvas>
+          <p class="note" id="globeNote"></p>
+        </div>
+        <div>
+          <p id="astroLead"></p>
+          <table id="cities"></table>
+          <p class="note">🌙 = the Moon is above that city's horizon right now, so people there could look up and see the place you are standing.
+            Local times use each city's time zone (including daylight saving time).</p>
+        </div>
+      </div>
+      <div id="story">
+        <div class="titlebar"><h2>🌕 Chang'e's flight to the Moon · 嫦娥奔月</h2><span class="legend">Story layer: switch it off with the 🐰 button at the top</span></div>
+        <div id="storyBody"></div>
+        <p class="note">🐇 In the 👩‍🚀 astronaut view, five Jade Rabbits (玉兔) are hiding within about 4 km of the landing site. Three of them hide in the darkest, coldest spots. Walk around and find them all!</p>
+      </div>
+    </section>
+
+    <div id="learn" class="learn hidden"></div>
+  </section>
+
+  <!-- RIGHT: comparison + window finder -->
+  <section class="panel" id="right">
+    <h2>3 · Compare scenarios</h2>
+    <div class="btnrow">
+      <button id="addCmp" class="primary">+ Add current site &amp; date</button>
+      <button id="cmpAll">Compare all sites on this date</button>
+      <button id="clearCmp">Clear</button>
+    </div>
+    <div id="cmp"></div>
+
+    <h2>4 · Landing window finder</h2>
+    <p class="note">Find dates when this site has Sun <b>and</b> Earth in view continuously for at least:</p>
+    <div class="btnrow">
+      <input id="minDays" type="number" min="1" max="20" value="4" style="width:4em"> days
+      <button id="findWin" class="primary">Find windows</button>
+    </div>
+    <div id="windows"></div>
+  </section>
+</main>
+
+<footer>
+  <p id="validation"></p>
+  Data: <a href="https://ssd.jpl.nasa.gov/horizons/" target="_blank">NASA JPL Horizons</a> (DE441 ephemeris, sub-solar &amp; sub-Earth points, hourly 2026-11 → 2028-12) ·
+  <a href="https://trek.nasa.gov/moon/" target="_blank">NASA Moon Trek</a> (Artemis III candidate regions, CLPS sites, LOLA permanently shadowed regions map) ·
+  <a href="https://pds-geosciences.wustl.edu/missions/lro/lola.htm" target="_blank">NASA LRO LOLA</a> LDEM_80S_80M &amp; LDEM_75S_240M topography ·
+  <a href="https://quickmap.lroc.asu.edu/" target="_blank">LROC Quickmap</a> ·
+  <a href="https://www.asc-csa.gc.ca/eng/astronomy/moon-exploration/" target="_blank">CSA Moon Exploration</a>.<br>
+  Code and data-processing scripts were written with AI assistance (Claude, Anthropic).
+  Site coordinates are approximate, from public mission reports. *always = no change through the end of the dataset (2028-12). NASA Space Apps Challenge 2026.
+</footer>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+<script src="app.js"></script>
+<script src="extra.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
+<script src="astronaut.js"></script>
+<script src="story.js"></script>
+</body>
+</html>
