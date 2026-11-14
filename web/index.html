@@ -17,35 +17,32 @@
     </div>
   </div>
   <div class="modes">
-    <button id="modePlanner" class="mode active">Mission planner</button>
-    <button id="modeLearn" class="mode">Learn why</button>
-    <button id="storyBtn" class="mode" title="Show or hide the Chang'e & Jade Rabbit story">🐰 Chang'e &amp; Jade Rabbit</button>
+    <button id="storyBtn" class="mode" title="Show or hide the Chang'e &amp; Jade Rabbit story">🐰 Chang'e story: ON</button>
   </div>
 </header>
 
+<nav id="tabs">
+  <button data-tab="plan" class="tab active">🛰️ Plan a landing</button>
+  <button data-tab="nearby" class="tab">🔍 Nearby spots</button>
+  <button data-tab="walk" class="tab">👩‍🚀 Walk on the Moon</button>
+  <button data-tab="earth" class="tab">🌍 See Earth</button>
+  <button data-tab="story" class="tab" id="storyTab">🐰 Chang'e &amp; Jade Rabbit</button>
+  <button data-tab="learn" class="tab">📚 Learn why</button>
+</nav>
+
 <main>
-  <!-- LEFT: site + time selection -->
-  <section class="panel" id="left">
+  <!-- SIDEBAR: always visible -->
+  <aside class="panel" id="left">
+    <div id="mini" class="mini"></div>
     <h2>1 · Choose a site</h2>
     <select id="siteSelect"></select>
     <p id="siteNote" class="note"></p>
+    <canvas id="map" width="460" height="460" title="Click to pick a custom site"></canvas>
+    <p class="note">South pole map 75°S–90°S (NASA LRO LOLA). <b>Click anywhere</b> to test your own site.</p>
     <div class="coords">
       <label>Lat <input id="latIn" type="number" step="0.01"></label>
       <label>Lon °E <input id="lonIn" type="number" step="0.01"></label>
-      <button id="goCustom">Use custom</button>
-    </div>
-    <canvas id="map" width="460" height="460" title="Click to pick a custom site"></canvas>
-    <p class="note">South pole map 75°S–90°S (NASA LRO LOLA). <b>Click anywhere</b> to evaluate a custom site — the terrain horizon is computed live.</p>
-    <div class="links" id="links"></div>
-    <div id="nac" class="nacbox"></div>
-
-    <div id="heatWrap">
-      <h2>Nearby alternatives (±15 km)</h2>
-      <div class="btnrow" id="hmBtns">
-        <button data-hm="sun" class="active">Sunlit %</button><button data-hm="earth">Earth %</button><button data-hm="both">Both %</button>
-      </div>
-      <canvas id="heat" width="310" height="344" title="Click a cell to evaluate that spot"></canvas>
-      <p class="note" id="heatNote"></p>
+      <button id="goCustom">Go</button>
     </div>
 
     <h2>2 · Choose a date (UTC)</h2>
@@ -61,80 +58,123 @@
       <button data-shift="24">+ 1 day</button>
       <button data-shift="709">+ 1 lunar day</button>
     </div>
-  </section>
 
-  <!-- CENTER: sky + timeline -->
-  <section class="panel" id="center">
-    <div class="titlebar">
-      <h2 id="skyTitle">Sky view</h2>
-      <span class="legend"><i class="sun"></i>Sun <i class="earth"></i>Earth <i class="terrain"></i>Terrain horizon (LOLA)</span>
-    </div>
-    <canvas id="sky" width="900" height="330"></canvas>
-    <p class="note">Panorama around the lander. Vertical scale is stretched so the low polar Sun is visible. Sun &amp; Earth are drawn at their <b>true angular size</b>. Dotted lines = path over the next 30 days.</p>
+    <div class="links" id="links"></div>
+    <div id="nac" class="nacbox"></div>
+  </aside>
 
-    <div class="cards" id="cards"></div>
-
-    <div class="titlebar"><h2>Next 30 days</h2><span class="legend"><i class="sun"></i>Sunlit <i class="earth"></i>Earth visible <i class="both"></i>Both (power + comms)</span></div>
-    <canvas id="timeline" width="900" height="120"></canvas>
-
-    <div class="titlebar"><h2>Seasons · every lunar day, 2026-11 → 2028-12</h2><span class="legend"><i class="sun"></i>Sunlit <i class="earth"></i>Earth visible <i class="both"></i>Both · click a bar to jump</span></div>
-    <canvas id="season" width="900" height="150"></canvas>
-
-    <div id="threeWrap">
-      <div class="titlebar"><h2>3D terrain view</h2>
-        <span class="legend"><label>Vertical exaggeration <input id="exag" type="range" min="1" max="5" step="0.5" value="2"> <b id="exagV">2×</b></label></span></div>
-      <div class="btnrow"><button id="fpBtn" class="primary">👩‍🚀 Stand here as an astronaut</button>
-        <span class="note" id="fpHint"></span></div>
-      <div id="threeBox">
-        <div id="three"></div>
-        <div id="walkHud" style="display:none"></div>
-        <div id="rabbitHud" style="display:none"></div>
-        <div id="walkPad"><button data-k="w">▲</button><button data-k="a">◀</button><button data-k="s">▼</button><button data-k="d">▶</button></div>
+  <section class="panel" id="content">
+    <!-- TAB 1: planner -->
+    <div class="tabpane" id="tab-plan">
+      <p class="intro">Is this a good place and time to land? Check whether the lander gets <b class="sunc">sunlight for power</b> and has <b class="earthc">Earth in view for radio contact</b>.</p>
+      <div class="titlebar">
+        <h2 id="skyTitle">Sky view</h2>
+        <span class="legend"><i class="sun"></i>Sun <i class="earth"></i>Earth <i class="terrain"></i>Terrain horizon (LOLA)</span>
       </div>
-      <p class="note" id="threeNote"></p>
-    </div>
-
-    <section id="astro">
-      <div class="titlebar"><h2>👩‍🚀 Astronaut view · Earth from this spot</h2><span class="legend" id="astroTime"></span></div>
-      <div class="astro-grid">
+      <canvas id="sky" width="900" height="330"></canvas>
+      <p class="note">Panorama around the lander. Vertical scale is stretched so the low polar Sun is visible. Sun &amp; Earth are drawn at their <b>true angular size</b>. Dotted lines = path over the next 30 days.</p>
+      <div class="cards" id="cards"></div>
+      <div class="titlebar"><h2>Next 30 days</h2><span class="legend"><i class="sun"></i>Sunlit <i class="earth"></i>Earth visible <i class="both"></i>Both (power + comms)</span></div>
+      <canvas id="timeline" width="900" height="120"></canvas>
+      <div class="titlebar"><h2>Seasons · every lunar day, 2026-11 → 2028-12</h2><span class="legend"><i class="sun"></i>Sunlit <i class="earth"></i>Earth visible <i class="both"></i>Both · click a bar to jump</span></div>
+      <canvas id="season" width="900" height="150"></canvas>
+      <div class="two">
         <div>
-          <canvas id="globe" width="340" height="340"></canvas>
-          <p class="note" id="globeNote"></p>
+          <h2>Compare scenarios</h2>
+          <div class="btnrow">
+            <button id="addCmp" class="primary">+ Add current site &amp; date</button>
+            <button id="cmpAll">Compare all sites on this date</button>
+            <button id="clearCmp">Clear</button>
+          </div>
+          <div id="cmp"></div>
         </div>
         <div>
-          <p id="astroLead"></p>
-          <table id="cities"></table>
-          <p class="note">🌙 = the Moon is above that city's horizon right now, so people there could look up and see the place you are standing.
-            Local times use each city's time zone (including daylight saving time).</p>
+          <h2>Landing window finder</h2>
+          <p class="note">Find dates when this site has Sun <b>and</b> Earth in view continuously for at least:</p>
+          <div class="btnrow">
+            <input id="minDays" type="number" min="1" max="20" value="4" style="width:4em"> days
+            <button id="findWin" class="primary">Find windows</button>
+          </div>
+          <div id="windows"></div>
         </div>
       </div>
+    </div>
+
+    <!-- TAB 2: nearby -->
+    <div class="tabpane" id="tab-nearby" hidden>
+      <p class="intro">Moving just a few kilometres can change everything. This map shows how often each spot around the site gets sunlight and sees Earth. <b>Click a cell</b> to move the site there.</p>
+      <p class="note polarNone">This map is available for the named south-polar sites (south of 80°S). Choose one in the list on the left.</p>
+      <div id="heatWrap" class="nearby-grid">
+        <div>
+          <div class="btnrow" id="hmBtns">
+            <button data-hm="sun" class="active">☀ Sunlit %</button><button data-hm="earth">🌍 Earth %</button><button data-hm="both">✅ Both %</button>
+          </div>
+          <canvas id="heat" width="310" height="344" title="Click a cell to evaluate that spot"></canvas>
+        </div>
+        <div>
+          <p id="heatNote"></p>
+          <p class="note">Colours: dark purple = rarely, yellow = almost always. The heights come from NASA LOLA terrain (80 m grid), and the Sun and Earth positions from NASA JPL Horizons, sampled every 3 hours.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 3: walk -->
+    <div class="tabpane" id="tab-walk" hidden>
+      <p class="intro">Fly over the real terrain around the site, then press <b>👩‍🚀 Stand here as an astronaut</b> to walk on it. The Sun and Earth are in their real positions for the chosen date.</p>
+      <p class="note polarNone">The 3D view is available for the named south-polar sites (south of 80°S). Choose one in the list on the left.</p>
+      <div id="threeWrap">
+        <div class="btnrow"><button id="fpBtn" class="primary">👩‍🚀 Stand here as an astronaut</button>
+          <span class="legend"><label>Vertical exaggeration <input id="exag" type="range" min="1" max="5" step="0.5" value="2"> <b id="exagV">2×</b></label></span></div>
+        <p class="note" id="fpHint"></p>
+        <div id="threeBox">
+          <div id="three"></div>
+          <div id="walkHud" style="display:none"></div>
+          <div id="rabbitHud" style="display:none"></div>
+          <div id="walkPad"><button data-k="w">▲</button><button data-k="a">◀</button><button data-k="s">▼</button><button data-k="d">▶</button></div>
+        </div>
+        <p class="note" id="threeNote"></p>
+      </div>
+    </div>
+
+    <!-- TAB 4: Earth -->
+    <div class="tabpane" id="tab-earth" hidden>
+      <section id="astro">
+        <p class="intro">Standing at this site, what does Earth look like, and who on Earth can see the Moon right now?</p>
+        <div class="titlebar"><h2>Earth from this spot</h2><span class="legend" id="astroTime"></span></div>
+        <div class="astro-grid">
+          <div>
+            <canvas id="globe" width="340" height="340"></canvas>
+            <p class="note" id="globeNote"></p>
+          </div>
+          <div>
+            <p id="astroLead"></p>
+            <table id="cities"></table>
+            <p class="note">🌙 = the Moon is above that city's horizon right now, so people there could look up and see the place you are standing.
+              Local times use each city's time zone (including daylight saving time).</p>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- TAB 5: story -->
+    <div class="tabpane" id="tab-story" hidden>
       <div id="story">
-        <div class="titlebar"><h2>🌕 Chang'e's flight to the Moon · 嫦娥奔月</h2><span class="legend">Story layer: switch it off with the 🐰 button at the top</span></div>
+        <div class="titlebar"><h2>🌕 Chang'e's flight to the Moon · 嫦娥奔月</h2><span class="legend">You can switch the story off with the 🐰 button at the top right</span></div>
         <div id="storyBody"></div>
-        <p class="note">🐇 In the 👩‍🚀 astronaut view, five Jade Rabbits (玉兔) are hiding within about 4 km of the landing site. Three of them hide in the darkest, coldest spots. Walk around and find them all!</p>
+        <div class="game">
+          <h3>🐇 Game: find the Jade Rabbits (玉兔)</h3>
+          <p>Five Jade Rabbits are hiding within about 4 km of the landing site. Three of them hide in the <b>darkest, coldest spots</b>, just like real water ice.
+            Walk around on the real terrain and find them all. A box at the bottom left tells you how far away the nearest one is.</p>
+          <button id="startHunt" class="primary">🐇 Start the rabbit hunt</button> <span class="note" id="huntNote"></span>
+        </div>
       </div>
-    </section>
-
-    <div id="learn" class="learn hidden"></div>
-  </section>
-
-  <!-- RIGHT: comparison + window finder -->
-  <section class="panel" id="right">
-    <h2>3 · Compare scenarios</h2>
-    <div class="btnrow">
-      <button id="addCmp" class="primary">+ Add current site &amp; date</button>
-      <button id="cmpAll">Compare all sites on this date</button>
-      <button id="clearCmp">Clear</button>
+      <p class="note" id="storyOff" hidden>The Chang'e story is switched off. Press the 🐰 button at the top right to turn it on.</p>
     </div>
-    <div id="cmp"></div>
 
-    <h2>4 · Landing window finder</h2>
-    <p class="note">Find dates when this site has Sun <b>and</b> Earth in view continuously for at least:</p>
-    <div class="btnrow">
-      <input id="minDays" type="number" min="1" max="20" value="4" style="width:4em"> days
-      <button id="findWin" class="primary">Find windows</button>
+    <!-- TAB 6: learn -->
+    <div class="tabpane" id="tab-learn" hidden>
+      <div id="learn" class="learn"></div>
     </div>
-    <div id="windows"></div>
   </section>
 </main>
 
@@ -155,5 +195,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
 <script src="astronaut.js"></script>
 <script src="story.js"></script>
+<script src="tabs.js"></script>
 </body>
 </html>

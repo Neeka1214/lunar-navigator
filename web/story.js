@@ -26,8 +26,11 @@ function fmtTime(h) {
 /* ---------- Chang'e's flight calculator ---------- */
 function drawStory() {
   const box = $("story"); box.style.display = ST.on ? "" : "none";
+  $("storyOff").hidden = ST.on;
+  $("storyTab").style.display = ST.on ? "" : "none";
   $("storyBtn").classList.toggle("active", ST.on);
-  if (!ST.on) return;
+  $("storyBtn").textContent = `🐰 Chang'e story: ${ST.on ? "ON" : "OFF"}`;
+  if (!ST.on) { if (window.showTab && window.curTab === "story") window.showTab("plan"); return; }
   const i = Math.floor(T()), dkm = EPH.earth_dist_km[i];
   if (!ST.range) { let lo = 1e9, hi = 0; for (const v of EPH.earth_dist_km) { lo = Math.min(lo, v); hi = Math.max(hi, v); } ST.range = [lo, hi]; }
   const [lo, hi] = ST.range, surf = dkm - 6371 - 1737; // surface to surface

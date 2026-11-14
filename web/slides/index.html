@@ -6,169 +6,223 @@
 <title>Lunar Landing Site Navigator · Slides</title>
 <style>
   @page { size: 1920px 1080px; margin: 0; }
-  :root { --bg: #070b14; --panel: #111827; --line: #263049; --text: #eef1f8; --muted: #93a0bb; --sun: #ffc83d; --earth: #4aa8ff; --ok: #3ddc97; --bad: #ff6b6b; }
+  :root { --bg: #070b14; --panel: #111827; --line: #263049; --text: #eef1f8; --muted: #9aa6bf; --sun: #ffc83d; --earth: #4aa8ff; --ok: #3ddc97; --bad: #ff6b6b; --rab: #c9a2f2; }
   * { box-sizing: border-box; }
   html, body { margin: 0; background: #000; color: var(--text); font-family: "Segoe UI", system-ui, sans-serif; }
-  .slide { width: 1920px; height: 1080px; position: relative; overflow: hidden; background: var(--bg); page-break-after: always; break-after: page; padding: 80px 100px; }
-  @media screen { .slide { margin: 0 auto 24px; transform-origin: top center; } body { padding: 24px 0; } }
-  h1 { font-size: 92px; margin: 0; line-height: 1.05; letter-spacing: -1px; }
-  h2 { font-size: 64px; margin: 0 0 36px; line-height: 1.1; }
-  .kicker { color: var(--sun); font-size: 28px; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 18px; font-weight: 600; }
-  p, li { font-size: 32px; line-height: 1.4; color: var(--text); }
-  ul { margin: 0; padding-left: 36px; } li { margin: 0 0 16px; }
+  .slide { width: 1920px; height: 1080px; position: relative; overflow: hidden; background: var(--bg); page-break-after: always; break-after: page; padding: 56px 72px; }
+  @media screen { .slide { margin: 0 auto 24px; } body { padding: 24px 0; } }
+  h1 { font-size: 96px; margin: 0; line-height: 1.02; letter-spacing: -1px; }
+  h2 { font-size: 52px; margin: 0 0 22px; line-height: 1.1; }
+  h3 { font-size: 28px; margin: 0 0 8px; }
+  .kicker { color: var(--sun); font-size: 24px; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 10px; font-weight: 700; }
+  p, li { font-size: 25px; line-height: 1.38; color: var(--text); }
+  p { margin: 0 0 12px; }
+  ul { margin: 0; padding-left: 28px; } li { margin: 0 0 10px; }
   .muted { color: var(--muted); }
-  .sun { color: var(--sun); } .earth { color: var(--earth); } .ok { color: var(--ok); } .bad { color: var(--bad); }
-  .row { display: flex; gap: 48px; align-items: flex-start; }
+  .sun { color: var(--sun); } .earth { color: var(--earth); } .ok { color: var(--ok); } .bad { color: var(--bad); } .rab { color: var(--rab); }
+  .row { display: flex; gap: 36px; align-items: flex-start; }
   .col { flex: 1; min-width: 0; }
-  img { display: block; max-width: 100%; border-radius: 14px; }
-  .frame { border: 2px solid var(--line); border-radius: 16px; overflow: hidden; background: #000; }
-  .cap { font-size: 22px; color: var(--muted); margin-top: 10px; }
-  .num { position: absolute; right: 60px; bottom: 40px; font-size: 22px; color: var(--muted); }
-  .big { font-size: 120px; font-weight: 800; line-height: 1; }
-  .pill { display: inline-block; padding: 10px 24px; border-radius: 40px; font-size: 30px; font-weight: 700; margin: 0 12px 12px 0; }
-  .box { background: var(--panel); border: 2px solid var(--line); border-radius: 18px; padding: 26px 30px; }
-  .box h3 { margin: 0 0 8px; font-size: 32px; }
-  .box p { margin: 0; font-size: 25px; color: var(--muted); }
-  .grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
-  .arrow { font-size: 44px; color: var(--muted); text-align: center; margin: 6px 0; }
+  img { display: block; max-width: 100%; }
+  .frame { border: 2px solid var(--line); border-radius: 14px; overflow: hidden; background: #000; }
+  .frame img { width: 100%; }
+  .cap { font-size: 20px; color: var(--muted); margin-top: 8px; line-height: 1.35; }
+  .num { position: absolute; right: 48px; bottom: 26px; font-size: 20px; color: var(--muted); }
+  .box { background: var(--panel); border: 2px solid var(--line); border-radius: 16px; padding: 20px 24px; }
+  .box p, .box li { font-size: 22px; color: #cdd5e6; }
+  .box h3 { font-size: 27px; }
+  .tabchip { display: inline-block; padding: 6px 16px; border-radius: 30px; background: #1c3a66; border: 2px solid #4aa8ff; font-size: 22px; font-weight: 700; margin-right: 10px; }
+  .step { display: inline-flex; width: 38px; height: 38px; border-radius: 50%; background: var(--sun); color: #111; font-weight: 800; font-size: 22px; align-items: center; justify-content: center; margin-right: 10px; flex: 0 0 38px; }
+  .feat { display: flex; align-items: flex-start; margin: 0 0 14px; }
+  .feat p { margin: 0; font-size: 23px; }
+  .grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+  .stat { font-size: 64px; font-weight: 800; line-height: 1; }
+  .pill { display: inline-block; padding: 4px 14px; border-radius: 30px; font-size: 22px; font-weight: 800; margin-right: 6px; }
+  .flow .box p { font-size: 25px; } .flow .box h3 { font-size: 32px; }
+  .flow { display: grid; grid-template-columns: 1.15fr 70px 0.9fr 70px 1.15fr; align-items: center; gap: 0; }
+  .arrow { font-size: 54px; color: var(--muted); text-align: center; }
 </style>
 </head>
 <body>
 
-<!-- 1 · Title + team -->
+<!-- 1 · Title -->
 <section class="slide" style="padding:0">
-  <img src="img/three_overview.png" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; border-radius:0; opacity:.55">
-  <div style="position:absolute; inset:0; background:linear-gradient(90deg, rgba(7,11,20,.95) 0%, rgba(7,11,20,.7) 55%, rgba(7,11,20,.2) 100%)"></div>
-  <div style="position:relative; padding:120px 110px">
+  <img src="img/three_overview.png" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:.6">
+  <div style="position:absolute; inset:0; background:linear-gradient(90deg, rgba(7,11,20,.97) 0%, rgba(7,11,20,.8) 52%, rgba(7,11,20,.25) 100%)"></div>
+  <div style="position:relative; padding:90px 100px">
     <div class="kicker">NASA Space Apps Challenge 2026 · Taipei</div>
     <h1>Lunar Landing<br>Site Navigator</h1>
-    <p style="font-size:40px; margin-top:28px; max-width:1100px">Will the Sun power us, and can we call home?<br><span class="sun">Compare Moon landing sites and dates in seconds.</span></p>
-    <div style="margin-top:70px; font-size:30px; line-height:1.6">
+    <p style="font-size:38px; margin-top:24px; max-width:1150px">Will the Sun power us, and can we call home?<br><span class="sun">Compare Moon landing sites and dates in seconds,</span> then stand on the spot and look around.</p>
+    <div style="margin-top:34px; display:flex; flex-wrap:wrap; gap:12px; max-width:1250px">
+      <span class="tabchip">🛰️ Plan a landing</span><span class="tabchip">🔍 Nearby spots</span><span class="tabchip">👩‍🚀 Walk on the Moon</span>
+      <span class="tabchip">🌍 See Earth</span><span class="tabchip" style="background:#3a2456; border-color:#a87ad6">🐰 Chang'e &amp; Jade Rabbit</span><span class="tabchip">📚 Learn why</span>
+    </div>
+    <p style="font-size:26px; margin-top:22px" class="muted">24 official sites · hourly Sun &amp; Earth positions 2026–2028 · real NASA terrain · validated against NASA Moon Trek</p>
+    <div style="margin-top:44px; font-size:28px; line-height:1.6">
       <div><span class="muted">Challenge:</span> Lunar Landing Site Navigator</div>
-      <div><span class="muted">Team:</span> <b>neeka100</b></div>
-      <div><span class="muted">Team member:</span> <b>CHU, CAI-LIN</b>, National Taiwan University</div>
-      <div><span class="muted">Live tool:</span> neeka1214.github.io/lunar-navigator</div>
+      <div><span class="muted">Team:</span> <b>neeka100</b> · <span class="muted">Team member:</span> <b>CHU, CAI-LIN</b>, National Taiwan University</div>
+      <div><span class="muted">Live tool:</span> <b class="earth">neeka1214.github.io/lunar-navigator</b></div>
     </div>
   </div>
   <div class="num">1 / 7</div>
 </section>
 
-<!-- 2 · Problem -->
+<!-- 2 · Problem + approach -->
 <section class="slide">
-  <div class="kicker">The problem</div>
+  <div class="kicker">The problem &amp; our approach</div>
   <h2>At the lunar south pole, the Sun skims the horizon</h2>
-  <div class="frame" style="height:520px"><img src="img/sky.png" style="width:100%; height:520px; object-fit:cover; object-position:top"></div>
-  <div class="cap">Real view from the Artemis III "Connecting Ridge" region: the Sun (yellow) stays about 1.5° high and slides along the LOLA terrain horizon. Earth (blue) bobs above and below it.</div>
-  <div class="row" style="margin-top:34px">
-    <div class="col"><p><b class="sun">Power:</b> a hill a few km away can block the Sun for days.</p></div>
-    <div class="col"><p><b class="earth">Comms:</b> Earth rises and sets as the Moon wobbles (libration).</p></div>
-    <div class="col"><p><b>Replanning:</b> when a launch slips, NASA's detailed tools are slow to compare many site-and-date options.</p></div>
+  <div class="row">
+    <div class="col" style="flex:0 0 960px">
+      <div class="frame"><img src="img/sky.png"></div>
+      <div class="cap">Real sky panorama from the Artemis III "Connecting Ridge" region. The Sun (yellow) stays about 1.5° high and slides along the real terrain horizon (grey); Earth (blue) bobs above and below it.</div>
+    </div>
+    <div class="col">
+      <div class="feat"><span class="step">☀</span><p><b class="sun">Power:</b> with the Sun only 1–2° high, a hill several km away can block it for days.</p></div>
+      <div class="feat"><span class="step" style="background:var(--earth)">🌍</span><p><b class="earth">Comms:</b> Earth sits on the horizon and rises and sets as the Moon wobbles (libration).</p></div>
+      <div class="feat"><span class="step" style="background:var(--bad)">⏱</span><p><b>Replanning:</b> when a launch slips, every site and date must be checked again, quickly.</p></div>
+      <div class="feat"><span class="step" style="background:var(--ok)">👥</span><p><b>Users:</b> mission planners, rover teams, students and anyone who loves looking at the Moon.</p></div>
+    </div>
+  </div>
+  <div class="flow" style="margin-top:40px">
+    <div class="box"><h3>NASA open data</h3><p><b class="sun">JPL Horizons</b> Sun &amp; Earth geometry (19,009 hourly steps) · <b>LRO LOLA</b> terrain 80 m / 240 m · <b class="earth">Moon Trek</b> sites &amp; shadow map · <b>LROC QuickMap</b> images · <b>CSA</b></p></div>
+    <div class="arrow">→</div>
+    <div class="box"><h3>Our model</h3><p>Real horizon in 720 directions for each site (with lunar curvature), then Sun &amp; Earth above or below it, hour by hour</p></div>
+    <div class="arrow">→</div>
+    <div class="box"><h3>One web page, 6 tabs</h3><p>Free, in any browser, no install. Answers for planners <i>and</i> an experience for the public</p></div>
   </div>
   <div class="num">2 / 7</div>
 </section>
 
-<!-- 3 · Solution -->
+<!-- 3 · Plan a landing -->
 <section class="slide">
-  <div class="kicker">Our solution</div>
-  <h2>Pick a site, pick a date, get the answer</h2>
+  <div class="kicker">Tab 1 · 🛰️ Plan a landing</div>
+  <h2>Pick a site and a date, get the answer at once</h2>
   <div class="row">
-    <div class="col" style="flex:1.35">
-      <div class="frame"><img src="img/sky.png"></div>
-      <div class="frame" style="margin-top:20px"><img src="img/timeline.png"></div>
-      <div class="cap">Sky panorama + 30-day timeline: <span class="sun">sunlit</span>, <span class="earth">Earth visible</span>, <span class="ok">both</span>.</div>
+    <div class="col" style="flex:0 0 1180px">
+      <div class="frame"><img src="img/ui_plan.png"></div>
+      <div class="cap">The real interface. Left sidebar (always visible): site list, clickable south-pole map, date slider, and a live verdict.</div>
     </div>
     <div class="col">
-      <ul>
-        <li><b>24 official sites</b> from NASA Moon Trek (13 Artemis III regions, 7 CLPS missions, plus ISRO, JAXA and Apollo), or <b>click anywhere</b></li>
-        <li>Instant verdict: <span class="pill" style="background:#123a2c; color:var(--ok)">GO</span><span class="pill" style="background:#3a1620; color:var(--bad)">NO COMMS</span><span class="pill" style="background:#3a1620; color:var(--bad)">NO POWER</span></li>
-        <li>Time until <span class="sun">sunset</span> or <span class="earth">Earthset</span>, longest darkness, solar-panel output</li>
-        <li><b>Landing-window finder</b>: dates with Sun <i>and</i> Earth in view for N or more days</li>
-      </ul>
+      <div class="feat"><span class="step">1</span><p><b>24 official sites</b> from NASA Moon Trek: 13 Artemis III regions, 7 CLPS missions, plus ISRO, JAXA and Apollo 11. Or <b>click anywhere</b> on the map: the horizon is computed live.</p></div>
+      <div class="feat"><span class="step">2</span><p><b>Sky view:</b> Sun and Earth over the real horizon, with their paths for the next 30 days.</p></div>
+      <div class="feat"><span class="step">3</span><p><b>Verdict:</b> <span class="pill" style="background:#123a2c; color:var(--ok)">GO</span><span class="pill" style="background:#3a1620; color:var(--bad)">NO COMMS</span><span class="pill" style="background:#3a1620; color:var(--bad)">NO POWER</span> plus time to sunset / Earthrise, longest darkness, solar-panel output.</p></div>
+      <div class="feat"><span class="step">4</span><p><b>30-day timeline</b> and <b>seasons</b>: every lunar day 2026–2028 at a glance. Click a bar to jump there.</p></div>
+      <div class="box" style="margin-top:10px"><p><b style="color:var(--text)">Example, Connecting Ridge, 2026-11-14:</b> Sun 1.4° ✓, Earth −4.4° ✗ → <b class="bad">NO COMMS</b>. Earthrise in 4 d 9 h; next lunar day sunlit 73%; longest darkness 7 d 10 h.</p></div>
     </div>
   </div>
   <div class="num">3 / 7</div>
 </section>
 
-<!-- 4 · NASA data -->
+<!-- 4 · Compare + nearby -->
 <section class="slide">
-  <div class="kicker">How NASA data makes it possible</div>
-  <h2>Every number comes from NASA open data</h2>
-  <div class="grid3">
-    <div class="box"><h3 class="sun">JPL Horizons</h3><p>Hourly Sun and Earth geometry for 2026–2028 (sub-solar, sub-Earth and sub-Moon points). This gives the Sun and Earth position from <b>any</b> lunar site.</p></div>
-    <div class="box"><h3>LRO LOLA topography</h3><p>80 m and 240 m terrain models give the real horizon (no atmosphere, with lunar curvature), the heatmaps and the walkable 3D terrain.</p></div>
-    <div class="box"><h3 class="earth">NASA Moon Trek</h3><p>The Artemis III candidate regions, the CLPS landing sites, and the LOLA permanently-shadowed-regions map.</p></div>
-    <div class="box"><h3>LROC QuickMap</h3><p>LRO NAC image coverage for every site: how many images, the sharpest one, the newest one.</p></div>
-    <div class="box"><h3>Space agency partners</h3><p>CSA Moon exploration (education), ISRO Chandrayaan-3 and JAXA SLIM comparison sites.</p></div>
-    <div class="box" style="border-color:var(--ok)"><h3 class="ok">Validated</h3><p><b style="color:var(--text); font-size:40px">98.7%</b> agreement with Moon Trek's permanent-shadow map (300 test points). Sun and Earth positions match Horizons to within 0.01°.</p></div>
+  <div class="kicker">Tab 1 &amp; Tab 2 · 🔍 Compare, find a window, move a little</div>
+  <h2>Find the best site, the best date and the best spot</h2>
+  <div class="row" style="gap:28px">
+    <div class="col" style="flex:0 0 470px">
+      <div class="frame"><img src="img/compare.png" style="height:700px; object-fit:cover; object-position:left top"></div>
+      <div class="cap"><b style="color:var(--text)">Compare all 24 sites</b> on one date: Sun left, Earth left, % over the lunar day, 30-day bars. The best is highlighted.</div>
+    </div>
+    <div class="col" style="flex:0 0 440px">
+      <div class="frame"><img src="img/windows.png"></div>
+      <div class="cap"><b style="color:var(--text)">Landing-window finder:</b> 20 windows with Sun <i>and</i> Earth for 4+ days at Connecting Ridge (2026–2028). Click to jump.</div>
+    </div>
+    <div class="col">
+      <div class="frame"><img src="img/heat.png" style="height:520px; width:auto; margin:0 auto"></div>
+      <div class="cap"><b style="color:var(--text)">Nearby spots:</b> share of time sunlit for 3,721 points (0.5 km grid, ±15 km) over 2026–2028, on NASA LOLA terrain. Also Earth % and Both %.</div>
+      <p style="margin-top:12px; font-size:26px">Connecting Ridge centre: <b>48%</b> sunlit.<br>Just <b>10 km</b> south: <b class="sun">79%</b>. Click a cell to move there.</p>
+    </div>
   </div>
   <div class="num">4 / 7</div>
 </section>
 
-<!-- 5 · Planners -->
+<!-- 5 · Walk + Earth -->
 <section class="slide">
-  <div class="kicker">For mission planners</div>
-  <h2>Small moves, big differences</h2>
-  <div class="row">
-    <div class="col" style="flex:0 0 560px">
-      <div class="frame"><img src="img/heat.png" style="width:560px"></div>
-      <div class="cap">Share of time sunlit within ±15 km (0.5 km cells, NASA LOLA terrain). White square = region centre, green circle = best spot.</div>
+  <div class="kicker">Tab 3 · 👩‍🚀 Walk on the Moon &amp; Tab 4 · 🌍 See Earth</div>
+  <h2>Stand on the landing site and look home</h2>
+  <div class="row" style="gap:30px">
+    <div class="col">
+      <div class="frame"><img src="img/ui_walk.png"></div>
+      <div class="cap">3D overview: NASA LOLA terrain (200 m near the site, out to ±150 km), lit by the real Sun for the chosen date. Dashed lines point toward the Sun and Earth.</div>
+      <div class="row" style="gap:18px; margin-top:12px">
+        <div class="frame" style="flex:0 0 400px"><img src="img/three_fp.png"></div>
+        <div class="col"><p style="font-size:22px"><b>Astronaut view:</b> walk with W A S D on real terrain at eye height. A live box says <span class="sun">"Sun visible here"</span> and <span class="earth">"Earth visible: you can call home"</span>, plus the sunlit % of the spot you stand on. Zoom like binoculars.</p></div>
+      </div>
     </div>
     <div class="col">
-      <p style="font-size:36px">Connecting Ridge region centre: <b>48%</b> sunlit.<br>Only <b>10 km</b> south: <b class="sun">79%</b>.</p>
-      <div class="frame" style="margin-top:26px"><img src="img/season.png"></div>
-      <div class="cap">Seasons: every lunar day from 2026 to 2028. Click a bar to jump to that date.</div>
-      <ul style="margin-top:26px">
-        <li>Side-by-side comparison of any sites and dates; the best one is highlighted</li>
-        <li>LROC NAC image coverage, so you can check the real surface right away</li>
+      <div class="frame"><img src="img/ui_earth.png"></div>
+      <div class="cap">The face of Earth you would see from the site (JPL Horizons), with day and night, the local time on each time zone, and Earth's phase.</div>
+      <ul style="margin-top:12px">
+        <li style="font-size:23px"><b>Who can see the Moon right now?</b> Local time and sky in 11 cities, Taipei first</li>
+        <li style="font-size:23px"><b>NASA Deep Space Network:</b> which antenna (Goldstone, Madrid, Canberra) can talk to the lander now</li>
       </ul>
     </div>
   </div>
   <div class="num">5 / 7</div>
 </section>
 
-<!-- 6 · Everyone -->
+<!-- 6 · Chang'e + learn -->
 <section class="slide">
-  <div class="kicker">For students and stargazers</div>
-  <h2>Stand on the Moon and look home</h2>
-  <div class="row">
-    <div class="col" style="flex:1.45">
-      <div class="frame"><img src="img/three_fp.png" style="width:100%"></div>
-      <div class="cap">Astronaut view: walk on real LOLA terrain lit by the real Sun. A glowing Jade Rabbit 🐇 hides in a dark crater.</div>
+  <div class="kicker">Tab 5 · 🐰 Chang'e &amp; Jade Rabbit &amp; Tab 6 · 📚 Learn why</div>
+  <h2>A Moon legend everyone knows makes the science stick</h2>
+  <div class="row" style="gap:30px">
+    <div class="col" style="flex:0 0 1050px">
+      <div class="frame"><img src="img/ui_story.png"></div>
+      <div class="cap">Chang'e's flight calculator, using today's real Earth–Moon distance from JPL Horizons. It can be switched off with one button.</div>
     </div>
     <div class="col">
-      <div class="frame" style="width:430px"><img src="img/globe.png" style="width:430px"></div>
-      <ul style="margin-top:22px">
-        <li>The face of Earth you see, its time zones, and <b>which cities can see the Moon right now</b> (plus NASA's Deep Space Network antennas)</li>
-        <li><b>Chang'e &amp; the Jade Rabbit</b> (嫦娥 · 玉兔): Earth–Moon distance today, and how long the trip takes on foot, by train or by rocket. Find the rabbits! (can be switched off)</li>
-      </ul>
+      <p><b>嫦娥奔月:</b> how long would Chang'e take? Walking <b>9.1 years</b>, Taiwan High Speed Rail <b>55.2 days</b>, Apollo 11 <b>3.1 days</b>, light <b>1.32 s</b>.</p>
+      <p><b>"But wait, it is not that simple":</b> the Moon moves at 3,680 km/h and won't wait for her; she needs 11 km/s to escape Earth; the distance changes from 356,648 to 406,603 km (48.4 to 55.3 days by train).</p>
+      <div class="box" style="border-color:#6b4a8a; background:rgba(58,36,86,.3)"><h3 class="rab">🐇 Game: find the Jade Rabbits</h3><p>5 rabbits hide within 4 km in the 3D walk. Three hide in the <b style="color:var(--text)">darkest, coldest spots</b> from our data. Finding one teaches why water ice survives in permanent shadow.</p></div>
+      <div class="box" style="margin-top:14px"><h3>📚 Learn why</h3><p>Why the Sun is so low (1.5° tilt), why km matter, libration, the 29.5-day lunar day, no-atmosphere shadows, and the CSA lunar rover and Artemis II.</p></div>
     </div>
   </div>
   <div class="num">6 / 7</div>
 </section>
 
-<!-- 7 · Impact -->
+<!-- 7 · Validation, impact, team -->
 <section class="slide">
-  <div class="kicker">Impact &amp; next steps</div>
-  <h2>From hours of analysis to seconds</h2>
-  <div class="row">
+  <div class="kicker">Validation · impact · team</div>
+  <h2>Trustworthy numbers, from hours of analysis to seconds</h2>
+  <div class="grid3">
+    <div class="box" style="border-color:var(--ok)"><div class="stat ok">98.7%</div><p style="margin-top:8px">agreement with NASA Moon Trek's LOLA permanent-shadow map at 300 random south-pole points (149/150 shadowed, 147/150 sunlit found).</p></div>
+    <div class="box"><div class="stat sun">&lt; 0.01°</div><p style="margin-top:8px">difference between our Sun and Earth positions and direct JPL Horizons topocentric queries for the same site.</p></div>
+    <div class="box"><div class="stat earth">24 sites</div><p style="margin-top:8px">official sites from NASA Moon Trek, each with LROC NAC image coverage from QuickMap, and 19,009 hourly steps of data (2026-11 → 2028-12).</p></div>
+  </div>
+  <div class="row" style="margin-top:28px">
     <div class="col">
+      <h3>Impact</h3>
       <ul>
-        <li><b>Planners:</b> when a launch slips, see at once which nearby sites and dates still work</li>
-        <li><b>Science + engineering:</b> one shared, visual answer to "power and comms?"</li>
-        <li><b>Classrooms &amp; the public:</b> feel why the lunar south pole is so hard, and so exciting</li>
+        <li><b>Planners:</b> when a launch slips, see at once which sites, dates and nearby spots still give power and comms</li>
+        <li><b>Rover teams (e.g. CSA's lunar rover):</b> how far to drive for better sunlight</li>
+        <li><b>Classrooms &amp; the public:</b> feel why the south pole is so hard, and so exciting</li>
       </ul>
     </div>
     <div class="col">
+      <h3>Next steps</h3>
       <ul>
-        <li>Next: rover traverse planning along the heatmap</li>
-        <li>Next: 5 m LOLA terrain, relay-satellite coverage, temperature</li>
-        <li>Next: Chinese and other languages for classrooms worldwide</li>
+        <li>Rover traverse planning along the heatmap</li>
+        <li>5 m LOLA terrain, relay-satellite coverage, surface temperature</li>
+        <li>Chinese and other languages for classrooms</li>
       </ul>
+    </div>
+    <div class="col" style="flex:0 0 520px">
+      <div class="box">
+        <h3>Team neeka100</h3>
+        <p><b style="color:var(--text)">CHU, CAI-LIN</b>, National Taiwan University (solo)<br>Chose the features; came up with the Astronaut view and the Chang'e story</p>
+        <p style="margin-top:10px">Try it: <b class="earth">neeka1214.github.io/lunar-navigator</b></p>
+        <p style="margin-top:10px; font-size:18px">Data: NASA JPL Horizons, LRO LOLA, NASA Moon Trek, LROC QuickMap, CSA. Code written with AI assistance (Claude, Anthropic).</p>
+      </div>
     </div>
   </div>
-  <div class="box" style="margin-top:50px; text-align:center">
-    <p style="font-size:40px; color:var(--text)">Try it: <b class="earth">neeka1214.github.io/lunar-navigator</b></p>
-    <p style="margin-top:12px">Free, runs in any browser. Data: NASA JPL Horizons, LRO LOLA, NASA Moon Trek, LROC QuickMap, CSA, ISRO, JAXA.<br>Code written with AI assistance (Claude, Anthropic).</p>
+  <div class="box" style="margin-top:26px">
+    <h3>Built on the official challenge resources</h3>
+    <div class="grid3" style="grid-template-columns:repeat(5,1fr); gap:14px">
+      <p><b class="sun">JPL Horizons</b><br>Sun &amp; Earth from the Moon, Moon from Earth, distance</p>
+      <p><b class="earth">NASA Moon Trek</b><br>Artemis III regions, CLPS sites, LOLA shadow map (validation)</p>
+      <p><b style="color:var(--text)">LRO LOLA</b><br>80 m / 240 m terrain for horizons, heatmaps, 3D</p>
+      <p><b style="color:var(--text)">LROC QuickMap</b><br>NAC image coverage for every site</p>
+      <p><b class="bad">CSA</b><br>Lunar rover context, Ottawa in the city list, Learn tab</p>
+    </div>
   </div>
   <div class="num">7 / 7</div>
 </section>

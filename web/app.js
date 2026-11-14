@@ -456,9 +456,7 @@ function wire() {
   $("cmpAll").onclick = () => { S.cmp = SITES.filter((s) => !s.id.startsWith("custom")).map((s) => ({ site: s, t: T() })); drawCmp(); };
   $("clearCmp").onclick = () => { S.cmp = []; drawCmp(); };
   $("findWin").onclick = findWindows;
-  const setMode = (m) => { S.mode = m; $("modePlanner").classList.toggle("active", m === "planner"); $("modeLearn").classList.toggle("active", m === "learn"); render(); if (m === "learn") $("learn").scrollIntoView({ behavior: "smooth" }); };
-  $("modePlanner").onclick = () => setMode("planner");
-  $("modeLearn").onclick = () => setMode("learn");
+  // S.mode ("planner" / "learn") is set by the tabs (tabs.js)
   window.addEventListener("resize", () => { render(); drawCmp(); });
 }
 
@@ -476,5 +474,4 @@ function wire() {
   const h = location.hash;
   if (/[#&]cmp\b/.test(h)) $("cmpAll").click();
   if (/[#&]win\b/.test(h)) $("findWin").click();
-  if (/[#&]learn\b/.test(h)) $("modeLearn").click();
 })();
