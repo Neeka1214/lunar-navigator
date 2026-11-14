@@ -1,4 +1,5 @@
 """Fetch Sun and Earth geometry for the Moon from NASA JPL Horizons.
+Code written with AI assistance (Claude, Anthropic).
 
 For every hour in the time range we store:
   - sub-Earth point on the Moon (lon, lat)   -> direction of Earth in Moon-fixed frame

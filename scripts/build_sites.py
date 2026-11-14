@@ -50,7 +50,7 @@ def main():
         lon = math.degrees(math.atan2(y, x)) % 360
         regions.append({"name": name, "ring": ring})
         sites.append({
-            "id": "a3-" + slug(name), "name": f"Artemis III: {name}", "zh": f"Artemis III 候選區：{name}",
+            "id": "a3-" + slug(name), "name": f"Artemis III: {name}",
             "lat": round(lat, 4), "lon": round(lon, 4), "group": "Artemis III candidate region",
             "source": "NASA Moon Trek, Artemis III Candidate Landing Regions (A3_Named_regions)",
             "note": "Center of one of the 13 Artemis III candidate regions announced by NASA (Aug 2022).",
@@ -60,7 +60,7 @@ def main():
     for f in clps["features"]:
         at, g = f["attributes"], f["geometry"]
         sites.append({
-            "id": "clps-" + slug(at["LABEL"]), "name": f"CLPS: {at['LABEL']}", "zh": f"CLPS 任務：{at['site']}",
+            "id": "clps-" + slug(at["LABEL"]), "name": f"CLPS: {at['LABEL']}",
             "lat": round(g["y"], 4), "lon": round(g["x"] % 360, 4), "group": "CLPS (NASA Commercial Lunar Payload Services)",
             "source": "NASA Moon Trek, CLPS_sites layer",
             "note": f"{at['site']} · lander {at['lander']} · task order {at['clps_contr']}.",
@@ -69,22 +69,22 @@ def main():
     # crater floor in the 80 m DEM). IM-2 actually landed at Mons Mouton in March 2025.
     for s in sites:
         if s["id"] == "clps-intuitive-machines-im-2":
-            s.update(lat=-84.7906, lon=29.1957, zh="CLPS 任務：Mons Mouton（實際降落點）",
+            s.update(lat=-84.7906, lon=29.1957,
                      source="Moon Trek CLPS_sites (target) + reported landing coordinates (approx.)",
                      note="Landed at Mons Mouton, Mar 2025. Moon Trek lists the original target near Shackleton (-89.63, 132.32).")
     # --- reference sites (other nations / Apollo / PSR demo)
     sites += [
-        {"id": "shackleton-floor", "name": "Shackleton Crater floor (PSR)", "zh": "沙克爾頓撞擊坑底（永久陰影區）",
+        {"id": "shackleton-floor", "name": "Shackleton Crater floor (PSR)",
          "lat": -89.67, "lon": 129.78, "group": "Permanently shadowed region",
          "source": "Crater center; PSR status checked against Moon Trek PSR map",
          "note": "Crater floor in permanent shadow: a water-ice target, but solar power is impossible here."},
-        {"id": "chandrayaan3", "name": "Chandrayaan-3 Vikram (ISRO, India)", "zh": "月船三號（印度 ISRO）",
+        {"id": "chandrayaan3", "name": "Chandrayaan-3 Vikram (ISRO, India)",
          "lat": -69.373, "lon": 32.319, "group": "Other nations (Space Agency Partner)",
          "source": "ISRO public landing coordinates", "note": "ISRO lander, August 2023."},
-        {"id": "slim", "name": "SLIM (JAXA, Japan)", "zh": "SLIM（日本 JAXA）",
+        {"id": "slim", "name": "SLIM (JAXA, Japan)",
          "lat": -13.316, "lon": 25.251, "group": "Other nations (Space Agency Partner)",
          "source": "JAXA public landing coordinates", "note": "JAXA precision lander, January 2024."},
-        {"id": "apollo11", "name": "Apollo 11 Tranquility Base", "zh": "阿波羅 11 號 寧靜海基地",
+        {"id": "apollo11", "name": "Apollo 11 Tranquility Base",
          "lat": 0.6741, "lon": 23.4730, "group": "Apollo (comparison)",
          "source": "NASA / Moon Trek Apollo 11 bookmark",
          "note": "Equatorial reference: the Sun climbs high and Earth hangs almost fixed in the sky."},

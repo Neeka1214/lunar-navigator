@@ -1,5 +1,6 @@
 """Local preview server for web/ that tells the browser not to cache files,
-so every reload shows the latest version. Usage: python scripts/serve.py [port]"""
+so every reload shows the latest version. Usage: python scripts/serve.py [port]
+Code written with AI assistance (Claude, Anthropic)."""
 import http.server
 import socketserver
 import sys

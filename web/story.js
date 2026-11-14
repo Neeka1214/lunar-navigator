@@ -1,4 +1,4 @@
-/* Chang'e & the Jade Rabbit (嫦娥奔月 · 玉兔) — optional story layer
+/* Chang'e & the Jade Rabbit: a classic Moon legend as a story layer
  *  - Chang'e's flight calculator: real Earth–Moon distance now (JPL Horizons) -> travel time at different speeds
  *  - Find the Jade Rabbits while walking in the Astronaut view (3 hide in the darkest, coldest spots nearby)
  *  - Lives in its own tab; the rabbits only appear in 3D while the hunt is switched on
@@ -30,7 +30,7 @@ function drawStory() {
   const rows = [...SPEEDS, ["🌙 Chang'e (your choice)", ST.speed]].map(([name, v]) =>
     `<tr><td>${name}</td><td>${v >= 1e6 ? "300,000 km/s" : v.toLocaleString("en") + " km/h"}</td><td><b>${fmtTime(surf / v)}</b></td></tr>`).join("");
   $("storyBody").innerHTML = `
-    <p>In the old story, <b>Chang'e (嫦娥)</b> drank the elixir of immortality and floated up to the Moon, where the <b>Jade Rabbit (玉兔)</b> keeps her company.
+    <p>In the old story, <b>Chang'e</b> drank the elixir of immortality and floated up to the Moon, where the <b>Jade Rabbit</b> keeps her company.
     How long would her trip take? On <b>${fmtDate(T())}</b> the Moon is <b>${Math.round(dkm).toLocaleString("en")} km</b> from Earth
     (centre to centre, NASA JPL Horizons). That is about <b>${Math.round(surf).toLocaleString("en")} km</b> from ground to ground.
     The distance changes from ${Math.round(lo).toLocaleString("en")} km to ${Math.round(hi).toLocaleString("en")} km, because the Moon's orbit is an ellipse.</p>
@@ -103,11 +103,11 @@ function storyTick() {
     if (d < nd) { nd = d; near = r; }
   }
   hud.style.display = "";
-  if (!near) { hud.innerHTML = `🐇 All ${ST.rabbits.length} Jade Rabbits found! Chang'e (嫦娥) thanks you. ${ST.msg || ""}`; return; }
+  if (!near) { hud.innerHTML = `🐇 All ${ST.rabbits.length} Jade Rabbits found! Chang'e thanks you. ${ST.msg || ""}`; return; }
   const bearing = (Math.atan2(near.e - A.pos.e, near.n - A.pos.n) / D + 360) % 360;
   const rel = ((bearing - A.yaw + 540) % 360) - 180;
   const arrow = Math.abs(rel) < 22 ? "⬆ straight ahead" : rel > 0 ? (rel < 90 ? "↗ to your right" : "↘ behind you, right") : (rel > -90 ? "↖ to your left" : "↙ behind you, left");
-  hud.innerHTML = `🐇 Jade Rabbits (玉兔) found: <b>${ST.found}/${ST.rabbits.length}</b> · nearest is <b>${(nd / 1000).toFixed(2)} km</b> away, ${arrow}
+  hud.innerHTML = `🐇 Jade Rabbits found: <b>${ST.found}/${ST.rabbits.length}</b> · nearest is <b>${(nd / 1000).toFixed(2)} km</b> away, ${arrow}
     (bearing ${bearing.toFixed(0)}°)${ST.msg ? "<br>" + ST.msg : ""}`;
 }
 

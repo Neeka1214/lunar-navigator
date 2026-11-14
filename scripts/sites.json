@@ -2,7 +2,6 @@
  {
   "id": "a3-amundsen-rim",
   "name": "Artemis III: Amundsen Rim",
-  "zh": "Artemis III 候選區：Amundsen Rim",
   "lat": -84.2287,
   "lon": 69.444,
   "group": "Artemis III candidate region",
@@ -12,7 +11,6 @@
  {
   "id": "a3-nobile-rim-2",
   "name": "Artemis III: Nobile Rim 2",
-  "zh": "Artemis III 候選區：Nobile Rim 2",
   "lat": -83.954,
   "lon": 58.8221,
   "group": "Artemis III candidate region",
@@ -22,7 +20,6 @@
  {
   "id": "a3-haworth",
   "name": "Artemis III: Haworth",
-  "zh": "Artemis III 候選區：Haworth",
   "lat": -86.7639,
   "lon": 337.223,
   "group": "Artemis III candidate region",
@@ -32,7 +29,6 @@
  {
   "id": "a3-faustini-rim-a",
   "name": "Artemis III: Faustini Rim A",
-  "zh": "Artemis III 候選區：Faustini Rim A",
   "lat": -87.8897,
   "lon": 90.0,
   "group": "Artemis III candidate region",
@@ -42,7 +38,6 @@
  {
   "id": "a3-de-gerlache-rim-2",
   "name": "Artemis III: de Gerlache Rim 2",
-  "zh": "Artemis III 候選區：de Gerlache Rim 2",
   "lat": -88.23,
   "lon": 295.3716,
   "group": "Artemis III candidate region",
@@ -52,7 +47,6 @@
  {
   "id": "a3-connecting-ridge-extension",
   "name": "Artemis III: Connecting Ridge Extension",
-  "zh": "Artemis III 候選區：Connecting Ridge Extension",
   "lat": -89.0324,
   "lon": 258.0007,
   "group": "Artemis III candidate region",
@@ -62,7 +56,6 @@
  {
   "id": "a3-connecting-ridge",
   "name": "Artemis III: Connecting Ridge",
-  "zh": "Artemis III 候選區：Connecting Ridge",
   "lat": -89.4632,
   "lon": 222.5104,
   "group": "Artemis III candidate region",
@@ -72,7 +65,6 @@
  {
   "id": "a3-nobile-rim-1",
   "name": "Artemis III: Nobile Rim 1",
-  "zh": "Artemis III 候選區：Nobile Rim 1",
   "lat": -85.4381,
   "lon": 37.3667,
   "group": "Artemis III candidate region",
@@ -82,7 +74,6 @@
  {
   "id": "a3-peak-near-shakleton",
   "name": "Artemis III: Peak Near Shakleton",
-  "zh": "Artemis III 候選區：Peak Near Shakleton",
   "lat": -88.811,
   "lon": 123.6901,
   "group": "Artemis III candidate region",
@@ -92,7 +83,6 @@
  {
   "id": "a3-de-gerlache-rim",
   "name": "Artemis III: de Gerlache Rim",
-  "zh": "Artemis III 候選區：de Gerlache Rim",
   "lat": -88.6834,
   "lon": 292.0679,
   "group": "Artemis III candidate region",
@@ -102,7 +92,6 @@
  {
   "id": "a3-leibnitz-beta-plateau",
   "name": "Artemis III: Leibnitz Beta Plateau",
-  "zh": "Artemis III 候選區：Leibnitz Beta Plateau",
   "lat": -85.4266,
   "lon": 31.7428,
   "group": "Artemis III candidate region",
@@ -112,7 +101,6 @@
  {
   "id": "a3-malapert-massif",
   "name": "Artemis III: Malapert Massif",
-  "zh": "Artemis III 候選區：Malapert Massif",
   "lat": -85.9948,
   "lon": 359.7642,
   "group": "Artemis III candidate region",
@@ -122,7 +110,6 @@
  {
   "id": "a3-de-gerlache-kocher-massif",
   "name": "Artemis III: de Gerlache-Kocher Massif",
-  "zh": "Artemis III 候選區：de Gerlache-Kocher Massif",
   "lat": -85.8296,
   "lon": 243.678,
   "group": "Artemis III candidate region",
@@ -132,7 +119,6 @@
  {
   "id": "clps-astrobotic-peregrine-mission-1",
   "name": "CLPS: Astrobotic Peregrine Mission-1",
-  "zh": "CLPS 任務：Sinus Viscositatis",
   "lat": 35.26,
   "lon": 319.01,
   "group": "CLPS (NASA Commercial Lunar Payload Services)",
@@ -142,7 +128,6 @@
  {
   "id": "clps-astrobotic-griffin-mission-1",
   "name": "CLPS: Astrobotic Griffin Mission-1",
-  "zh": "CLPS 任務：Nobile Region",
   "lat": -85.28,
   "lon": 53.27,
   "group": "CLPS (NASA Commercial Lunar Payload Services)",
@@ -152,7 +137,6 @@
  {
   "id": "clps-intuitive-machines-im-1",
   "name": "CLPS: Intuitive Machines IM-1",
-  "zh": "CLPS 任務：Malapert A",
   "lat": -80.13,
   "lon": 1.44,
   "group": "CLPS (NASA Commercial Lunar Payload Services)",
@@ -162,7 +146,6 @@
  {
   "id": "clps-intuitive-machines-im-2",
   "name": "CLPS: Intuitive Machines IM-2",
-  "zh": "CLPS 任務：Mons Mouton（實際降落點）",
   "lat": -84.7906,
   "lon": 29.1957,
   "group": "CLPS (NASA Commercial Lunar Payload Services)",
@@ -172,7 +155,6 @@
  {
   "id": "clps-intuitive-machines-im-3",
   "name": "CLPS: Intuitive Machines IM-3",
-  "zh": "CLPS 任務：Reiner Gamma",
   "lat": 7.39,
   "lon": 301.04,
   "group": "CLPS (NASA Commercial Lunar Payload Services)",
@@ -182,7 +164,6 @@
  {
   "id": "clps-firefly-blue-ghost-mission-1",
   "name": "CLPS: Firefly Blue Ghost Mission 1",
-  "zh": "CLPS 任務：Mare Crisium",
   "lat": 16.18,
   "lon": 59.1,
   "group": "CLPS (NASA Commercial Lunar Payload Services)",
@@ -192,7 +173,6 @@
  {
   "id": "clps-team-draper-series-2",
   "name": "CLPS: Team Draper SERIES-2",
-  "zh": "CLPS 任務：Schrodinger Basin",
   "lat": -74.73,
   "lon": 132.93,
   "group": "CLPS (NASA Commercial Lunar Payload Services)",
@@ -202,7 +182,6 @@
  {
   "id": "shackleton-floor",
   "name": "Shackleton Crater floor (PSR)",
-  "zh": "沙克爾頓撞擊坑底（永久陰影區）",
   "lat": -89.67,
   "lon": 129.78,
   "group": "Permanently shadowed region",
@@ -212,7 +191,6 @@
  {
   "id": "chandrayaan3",
   "name": "Chandrayaan-3 Vikram (ISRO, India)",
-  "zh": "月船三號（印度 ISRO）",
   "lat": -69.373,
   "lon": 32.319,
   "group": "Other nations (Space Agency Partner)",
@@ -222,7 +200,6 @@
  {
   "id": "slim",
   "name": "SLIM (JAXA, Japan)",
-  "zh": "SLIM（日本 JAXA）",
   "lat": -13.316,
   "lon": 25.251,
   "group": "Other nations (Space Agency Partner)",
@@ -232,7 +209,6 @@
  {
   "id": "apollo11",
   "name": "Apollo 11 Tranquility Base",
-  "zh": "阿波羅 11 號 寧靜海基地",
   "lat": 0.6741,
   "lon": 23.473,
   "group": "Apollo (comparison)",

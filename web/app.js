@@ -1,6 +1,7 @@
 /* Lunar Landing Site Navigator
  * Sun/Earth geometry: NASA JPL Horizons sub-solar & sub-Earth points (hourly).
  * Terrain horizon: NASA LRO LOLA polar DEM.
+ * Code written with AI assistance (Claude, Anthropic).
  */
 "use strict";
 const R = 1737.4;               // km, lunar reference radius
@@ -207,7 +208,7 @@ function setCustom(lat, lon) {
   const { hz, elev } = computeHorizon(lat, lon);
   const id = `custom-${++customN}`;
   const site = {
-    id, name: `Custom ${lat.toFixed(2)}°, ${lon.toFixed(2)}°E`, zh: "自訂地點", lat, lon, group: "Custom",
+    id, name: `Custom ${lat.toFixed(2)}°, ${lon.toFixed(2)}°E`, lat, lon, group: "Custom",
     note: hz ? "Terrain horizon computed live from NASA LOLA topography (960 m/px)." : "Outside the LOLA polar tile — smooth-sphere horizon used.",
     horizon: hz, elev_m: elev,
   };
